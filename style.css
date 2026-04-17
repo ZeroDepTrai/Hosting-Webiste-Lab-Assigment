@@ -1,0 +1,181 @@
+
+/* 1. Reset mặc định của trình duyệt để canh chỉnh chuẩn hơn */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+p {
+    color: white; /* Đây là màu mặc định cho toàn bộ đoạn văn */
+}
+
+/* 2. Thiết lập cho Section Burger (Phần trên) */
+.hero-burger {
+    /* Đường dẫn đến ảnh của bạn */
+    background-image: url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/33/37/8c/the-real-bite-irish-beef.jpg?w=900&h=500&s=1'); 
+    
+    /* Các thuộc tính quan trọng để ảnh đẹp */
+    background-size: cover;       /* Ảnh phủ kín toàn bộ khung, không bị hở */
+    background-position: center;  /* Giữ trọng tâm ảnh ở giữa */
+    background-repeat: no-repeat; /* Không lặp lại ảnh */
+    
+    height: 500px;                /* Chiều cao của phần này */
+    display: flex;                /* Dùng Flexbox để canh chữ vào giữa */
+    align-items: center;          /* Canh giữa theo chiều dọc */
+    padding-left: 10%;            /* Đẩy chữ sang phải một chút như thiết kế */
+    color: white;
+}
+
+/* 3. Thiết lập cho Section Pizza (Phần dưới) */
+.promo-pizza {
+    background-image: url('https://file.hstatic.net/1000389344/article/pepperoni_5_1c9ba759196f480eba397d628ac958ed_1024x1024.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    height: 400px;
+    display: flex;
+    justify-content: flex-start; /* Chữ nằm bên trái */
+    align-items: center;
+    padding-left: 5%;
+}
+
+/* 4. Định dạng nút bấm (Order Now) */
+.btn-order {
+    display: inline-block;
+    background-color: white;
+    color: #333;
+    padding: 10px 25px;
+    text-decoration: none;
+    border-radius: 20px; /* Làm nút bo tròn */
+    font-weight: bold;
+    margin-top: 15px;
+    transition: 0.3s;    /* Hiệu ứng mượt khi di chuột vào */
+}
+
+.btn-order:hover {
+    background-color: #ffcc00; /* Đổi màu khi hover */
+}
+
+/* 5. Xóa các khoảng trắng mặc định */
+header nav ul {
+    list-style: none; /* Xóa dấu chấm đầu dòng */
+    margin: 0;
+    padding: 0;
+    display: flex;    /* Dàn hàng ngang các menu */
+    gap: 20px;        /* Khoảng cách giữa các chữ */
+}
+
+/* 6. Căn chỉnh toàn bộ thanh Nav */
+header nav {
+    background-color: #000; /* Màu nền đen như Figma */
+    display: flex;
+    justify-content: center; /* Đưa menu ra giữa hoặc dùng flex-end để đưa sang phải */
+    align-items: center;
+    padding: 15px 50px;
+    height: 60px;
+}
+
+/* 8. Chỉnh màu chữ và xóa gạch chân cho link */
+header nav ul li a {
+    text-decoration: none; /* Xóa gạch chân màu xanh */
+    color: #FF5733;       /* Màu cam giống trong Figma của bạn */
+    font-size: 14px;
+    font-family: Arial, sans-serif; /* Chọn font không chân cho chuẩn SEO và đẹp */
+    text-transform: capitalize;
+}
+
+/* 9. Hiệu ứng khi di chuột vào (Hover) */
+header nav ul li a:hover {
+    color: #ffffff; /* Đổi sang màu trắng khi di chuột vào */
+}
+
+header nav {
+    justify-content: space-between; /* Đẩy Menu sang 1 bên, Icon sang 1 bên */
+}
+
+.user-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.user-actions button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+}
+
+header nav ul {
+    display: flex;
+    margin: 0 auto; /* PHÉP MÀU: Đẩy menu vào chính giữa khoảng trống còn lại */
+    gap: 20px;
+    list-style: none;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+    /* Tăng con số này lên để giãn cách rộng ra */
+    gap: 55px; 
+}
+
+footer {
+    background-color: #bcbcbc; /* Màu xám như trong ảnh */
+    padding: 40px 0;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around; /* Chia đều khoảng cách 3 cột */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-col {
+    flex: 1;
+    padding: 0 20px;
+}
+
+/* Tạo đường kẻ dọc giữa các cột */
+.border-left {
+    border-left: 1px solid #7a7a7a;
+}
+
+/* Định dạng tiêu đề cột (Màu cam) */
+.footer-col h3 {
+    color: #FF5733;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+/* Định dạng chữ trong footer */
+.footer-col p, .footer-col li {
+    color: #000000;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.8;
+    list-style: none;
+}
+
+.footer-col a {
+    text-decoration: none;
+    color: #000;
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Chia làm 2 cột bằng nhau */
+    gap: 10px;
+    padding: 0;
+}
