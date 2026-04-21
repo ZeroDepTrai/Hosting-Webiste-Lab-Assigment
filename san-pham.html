@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Khám phá dòng xe BMW 2026 tại Việt Nam – từ sedan sang trọng đến SUV mạnh mẽ và xe điện thế hệ mới."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://www.bmw.vn/san-pham"/>
+  <title>Sản Phẩm – BMW Việt Nam</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- nav injected by shared.js -->
+
+  <main>
+    <section class="page-hero">
+      <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1600&q=80')"></div>
+      <div class="page-hero-content">
+        <p class="breadcrumb">Trang chủ / Sản phẩm</p>
+        <h1>Dòng Xe BMW 2026</h1>
+      </div>
+    </section>
+
+    <div class="content-area">
+      <div class="section-header">
+        <h2 class="section-title">Khám Phá Bộ Sưu Tập</h2>
+        <p class="section-sub">Từ sedan thanh lịch đến SUV mạnh mẽ, BMW mang đến sự hoàn hảo cho mọi phong cách sống.</p>
+      </div>
+
+      <div class="product-filters" role="group" aria-label="Lọc theo dòng xe">
+        <button class="filter-btn active" onclick="filterProducts(this,'all')">Tất cả</button>
+        <button class="filter-btn" onclick="filterProducts(this,'sedan')">Sedan</button>
+        <button class="filter-btn" onclick="filterProducts(this,'suv')">SUV / SAV</button>
+        <button class="filter-btn" onclick="filterProducts(this,'coupe')">Coupé</button>
+        <button class="filter-btn" onclick="filterProducts(this,'ev')">Xe Điện</button>
+      </div>
+
+      <div class="products-grid" role="list">
+        <article class="product-card" data-type="sedan" role="listitem">
+          <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=80" alt="BMW 320i Sedan" loading="lazy"/>
+          <div class="product-card-body">
+            <p class="product-card-series">3 Series</p>
+            <h3>BMW 320i Sedan</h3>
+            <div class="product-card-specs">
+              <div class="spec-item"><strong>184 hp</strong>Công suất</div>
+              <div class="spec-item"><strong>6,6s</strong>0–100 km/h</div>
+              <div class="spec-item"><strong>235 km/h</strong>Vmax</div>
+            </div>
+            <div class="product-card-price">Từ <span>1.899.000.000đ</span></div>
+            <div class="product-card-actions">
+              <button class="btn btn-dark" onclick="showToast('Cảm ơn! Chúng tôi sẽ liên hệ để đặt lịch lái thử.')">Lái thử</button>
+              <a href="bang-gia.html" class="btn btn-blue">Xem giá</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-type="sedan" role="listitem">
+          <img src="https://images.unsplash.com/photo-1536700503584-b70b85a40d4f?w=800&q=80" alt="BMW 330i xDrive" loading="lazy"/>
+          <div class="product-card-body">
+            <p class="product-card-series">3 Series</p>
+            <h3>BMW 330i xDrive</h3>
+            <div class="product-card-specs">
+              <div class="spec-item"><strong>258 hp</strong>Công suất</div>
+              <div class="spec-item"><strong>5,6s</strong>0–100 km/h</div>
+              <div class="spec-item"><strong>250 km/h</strong>Vmax</div>
+            </div>
+            <div class="product-card-price">Từ <span>2.289.000.000đ</span></div>
+            <div class="product-card-actions">
+              <button class="btn btn-dark" onclick="showToast('Cảm ơn! Chúng tôi sẽ liên hệ để đặt lịch lái thử.')">Lái thử</button>
+              <a href="bang-gia.html" class="btn btn-blue">Xem giá</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-type="suv" role="listitem">
+          <img src="https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?w=800&q=80" alt="BMW X5 xDrive40i" loading="lazy"/>
+          <div class="product-card-body">
+            <p class="product-card-series">X5</p>
+            <h3>BMW X5 xDrive40i</h3>
+            <div class="product-card-specs">
+              <div class="spec-item"><strong>340 hp</strong>Công suất</div>
+              <div class="spec-item"><strong>5,5s</strong>0–100 km/h</div>
+              <div class="spec-item"><strong>250 km/h</strong>Vmax</div>
+            </div>
+            <div class="product-card-price">Từ <span>4.599.000.000đ</span></div>
+            <div class="product-card-actions">
+              <button class="btn btn-dark" onclick="showToast('Cảm ơn! Chúng tôi sẽ liên hệ để đặt lịch lái thử.')">Lái thử</button>
+              <a href="bang-gia.html" class="btn btn-blue">Xem giá</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-type="suv" role="listitem">
+          <img src="https://images.unsplash.com/photo-1549399542-7e8ee8c6c5a0?w=800&q=80" alt="BMW X3 30 xDrive" loading="lazy"/>
+          <div class="product-card-body">
+            <p class="product-card-series">X3</p>
+            <h3>BMW X3 30 xDrive</h3>
+            <div class="product-card-specs">
+              <div class="spec-item"><strong>245 hp</strong>Công suất</div>
+              <div class="spec-item"><strong>6,4s</strong>0–100 km/h</div>
+              <div class="spec-item"><strong>230 km/h</strong>Vmax</div>
+            </div>
+            <div class="product-card-price">Từ <span>2.799.000.000đ</span></div>
+            <div class="product-card-actions">
+              <button class="btn btn-dark" onclick="showToast('Cảm ơn! Chúng tôi sẽ liên hệ để đặt lịch lái thử.')">Lái thử</button>
+              <a href="bang-gia.html" class="btn btn-blue">Xem giá</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-type="coupe" role="listitem">
+          <img src="https://images.unsplash.com/photo-1586465398904-2b694b4d7fe2?w=800&q=80" alt="BMW M4 Coupé" loading="lazy"/>
+          <div class="product-card-body">
+            <p class="product-card-series">M Series</p>
+            <h3>BMW M4 Coupé</h3>
+            <div class="product-card-specs">
+              <div class="spec-item"><strong>530 hp</strong>Công suất</div>
+              <div class="spec-item"><strong>3,9s</strong>0–100 km/h</div>
+              <div class="spec-item"><strong>290 km/h</strong>Vmax</div>
+            </div>
+            <div class="product-card-price">Từ <span>5.899.000.000đ</span></div>
+            <div class="product-card-actions">
+              <button class="btn btn-dark" onclick="showToast('Cảm ơn! Chúng tôi sẽ liên hệ để đặt lịch lái thử.')">Lái thử</button>
+              <a href="bang-gia.html" class="btn btn-blue">Xem giá</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card" data-type="ev" role="listitem">
+          <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80" alt="BMW iX xDrive50" loading="lazy"/>
+          <div class="product-card-body">
+            <p class="product-card-series">i Series – Xe Điện</p>
+            <h3>BMW iX xDrive50</h3>
+            <div class="product-card-specs">
+              <div class="spec-item"><strong>523 hp</strong>Công suất</div>
+              <div class="spec-item"><strong>4,6s</strong>0–100 km/h</div>
+              <div class="spec-item"><strong>630 km</strong>Phạm vi</div>
+            </div>
+            <div class="product-card-price">Từ <span>5.299.000.000đ</span></div>
+            <div class="product-card-actions">
+              <button class="btn btn-dark" onclick="showToast('Cảm ơn! Chúng tôi sẽ liên hệ để đặt lịch lái thử.')">Lái thử</button>
+              <a href="bang-gia.html" class="btn btn-blue">Xem giá</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <!-- footer injected by shared.js -->
+  <script src="shared.js"></script>
+  <script>
+    function filterProducts(btn, type) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.product-card').forEach(card => {
+        card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
