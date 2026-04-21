@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đặt Bàn – Reservation | Burger VN</title>
+  <meta name="description" content="Đặt bàn trực tuyến tại Burger VN. Chọn ngày giờ, số lượng khách và địa điểm. Xác nhận nhanh chóng, trải nghiệm tuyệt vời." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://tennhahang.vn/reservation" />
+  <meta property="og:title" content="Đặt Bàn Online – Burger VN" />
+  <meta property="og:description" content="Đặt bàn dễ dàng, nhanh chóng. Chọn ngày & giờ, xác nhận ngay!" />
+  <meta property="og:type" content="website" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FoodEstablishment","name":"Burger VN","url":"https://tennhahang.vn","hasMap":"https://tennhahang.vn/reservation","acceptsReservations":"true","telephone":"1900-123-456-78","address":{"@type":"PostalAddress","streetAddress":"264 Đội Cấn","addressLocality":"Ba Đình","addressRegion":"Hà Nội","addressCountry":"VN"}}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --orange: #FF5733;
+      --orange-dark: #D94528;
+      --dark: #111;
+      --white: #fff;
+      --border: rgba(255,255,255,0.08);
+      --muted: #888;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--dark); color: var(--white); min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* NAV */
+    header { background: #0a0a0a; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    nav { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .logo { font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--orange); }
+    .logo span { color: var(--white); }
+    nav ul { display: flex; gap: 2px; }
+    nav ul a { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #aaa; padding: 5px 10px; border-radius: 6px; transition: color .2s; }
+    nav ul a:hover, nav ul a.active { color: var(--orange); }
+    .nav-icons { display: flex; gap: 4px; }
+    .nav-icons button { background: none; border: none; cursor: pointer; color: #aaa; width: 36px; height: 36px; border-radius: 8px; display: grid; place-items: center; transition: color .2s; }
+    .nav-icons button:hover { color: var(--orange); }
+    .nav-icons svg { width: 19px; height: 19px; }
+
+    /* RESERVATION WRAPPER */
+    .reservation-wrapper {
+      min-height: calc(100vh - 58px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    /* LEFT – image side */
+    .res-visual {
+      position: relative;
+      overflow: hidden;
+    }
+    .res-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=900&auto=format&fit=crop') center/cover no-repeat;
+    }
+    .res-visual::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,87,51,.75) 0%, rgba(10,10,10,.6) 100%);
+    }
+    .res-visual-content {
+      position: relative; z-index: 1;
+      padding: 64px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+    }
+    .res-visual-content h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .res-visual-content p { font-size: 0.95rem; color: rgba(255,255,255,.8); max-width: 320px; line-height: 1.7; }
+
+    /* RIGHT – form side */
+    .res-form-side {
+      background: var(--orange);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 56px;
+    }
+
+    .res-form-side h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-align: center;
+      color: var(--white);
+      margin-bottom: 36px;
+      text-transform: uppercase;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.74rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.75); }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--white);
+      border: 2px solid transparent;
+      border-radius: 8px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: #333;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus { border-color: #333; box-shadow: 0 0 0 3px rgba(0,0,0,.12); }
+    .form-group input::placeholder { color: #aaa; }
+
+    /* Custom select arrow */
+    .select-wrap { position: relative; }
+    .select-wrap::after {
+      content: '▼';
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      font-size: 0.65rem; color: #555; pointer-events: none;
+    }
+
+    .form-single { margin-bottom: 14px; }
+
+    /* BOOK NOW */
+    .btn-book {
+      display: block;
+      width: 100%;
+      margin-top: 28px;
+      padding: 16px;
+      background: transparent;
+      border: 2px solid var(--white);
+      color: var(--white);
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background .25s, color .25s, transform .2s;
+    }
+    .btn-book:hover { background: var(--white); color: var(--orange); transform: translateY(-2px); }
+
+    /* Success toast */
+    .toast {
+      display: none;
+      position: fixed; bottom: 28px; right: 28px;
+      background: #27ae60; color: #fff;
+      font-weight: 700; font-size: 0.9rem;
+      padding: 14px 24px; border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.3);
+      z-index: 999;
+      animation: slideIn .3s ease;
+    }
+    .toast.show { display: block; }
+    @keyframes slideIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .reservation-wrapper { grid-template-columns: 1fr; }
+      .res-visual { min-height: 240px; }
+      .res-form-side { padding: 40px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav aria-label="Main Navigation">
+    <a href="/" class="logo">Burger<span>VN</span></a>
+    <ul role="list">
+      <li><a href="/">Home</a></li>
+      <li><a href="/shop">Shop</a></li>
+      <li><a href="/reservation" class="active" aria-current="page">Reservation</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+    <div class="nav-icons">
+      <button aria-label="Tìm kiếm"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="11" cy="11" r="7" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke-width="2" stroke-linecap="round"/></svg></button>
+      <button aria-label="Tài khoản"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></button>
+      <button aria-label="Giỏ hàng"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6h13M10 19a1 1 0 100 2 1 1 0 000-2zm8 0a1 1 0 100 2 1 1 0 000-2z"/></svg></button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="reservation-wrapper">
+
+    <!-- LEFT: Visual -->
+    <div class="res-visual" aria-hidden="true">
+      <div class="res-visual-content">
+        <h2>Trải Nghiệm<br/>Bữa Ăn<br/>Khó Quên</h2>
+        <p>Đặt bàn ngay hôm nay và nhận ưu đãi đặc biệt cho lần đầu. Chúng tôi luôn sẵn sàng chào đón bạn!</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="res-form-side">
+      <h1>Reservation</h1>
+
+      <form id="resForm" novalidate aria-label="Form đặt bàn">
+
+        <!-- Name + Email -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="res-name">Họ tên</label>
+            <input type="text" id="res-name" name="name" placeholder="Kelly West" autocomplete="name" required aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label for="res-email">Email</label>
+            <input type="email" id="res-email" name="email" placeholder="Ndd@gmail.com" autocomplete="email" required aria-required="true" />
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-single form-group">
+          <label for="res-phone">Số điện thoại</label>
+          <div class="select-wrap">
+            <input type="tel" id="res-phone" name="phone" placeholder="0123456789" autocomplete="tel" required aria-required="true" />
+          </div>
+        </div>
+
+        <!-- Date -->
+        <div class="form-single form-group">
+          <label for="res-date">Ngày đặt bàn</label>
+          <div class="select-wrap">
+            <input type="date" id="res-date" name="date" required aria-required="true" />
+          </div>
+        </div>
+
+        <!-- Time -->
+        <div class="form-single form-group">
+          <label for="res-time">Giờ đặt bàn</label>
+          <div class="select-wrap">
+            <select id="res-time" name="time" required aria-required="true">
+              <option value="">Chọn giờ</option>
+              <option value="09:00">09:00 AM</option>
+              <option value="10:00">10:00 AM</option>
+              <option value="11:00" selected>11:00 AM</option>
+              <option value="12:00">12:00 PM</option>
+              <option value="13:00">01:00 PM</option>
+              <option value="14:00">02:00 PM</option>
+              <option value="18:00">06:00 PM</option>
+              <option value="19:00">07:00 PM</option>
+              <option value="20:00">08:00 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="form-single form-group">
+          <label for="res-location">Chi nhánh</label>
+          <div class="select-wrap">
+            <select id="res-location" name="location" required aria-required="true">
+              <option value="">Chọn chi nhánh</option>
+              <option value="singapore" selected>Singapore</option>
+              <option value="hanoi">Hà Nội – Đội Cấn</option>
+              <option value="hcm">TP. Hồ Chí Minh</option>
+              <option value="danang">Đà Nẵng</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-book" aria-label="Xác nhận đặt bàn">BOOK NOW</button>
+      </form>
+    </div>
+
+  </div>
+</main>
+
+<div class="toast" id="toast" role="alert" aria-live="polite">✓ Đặt bàn thành công! Chúng tôi sẽ liên hệ sớm.</div>
+
+<script>
+  document.getElementById('resForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+    this.reset();
+  });
+</script>
+</body>
+</html>

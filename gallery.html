@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery – Thư Viện Ảnh Burger | Burger VN</title>
+  <meta name="description" content="Khám phá thư viện ảnh burger hấp dẫn tại Burger VN. Xem các món ăn ngon mắt, từ burger thịt bò đến combo đặc biệt." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://tennhahang.vn/gallery" />
+  <meta property="og:title" content="Gallery – Thư Viện Ảnh Burger" />
+  <meta property="og:description" content="Khám phá những chiếc burger đẹp mắt, ngon miệng của chúng tôi!" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200" />
+  <meta property="og:type" content="website" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"ImageGallery","name":"Burger Gallery – Burger VN","url":"https://tennhahang.vn/gallery","description":"Thư viện ảnh các món burger ngon nhất"}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #FF5733;
+      --dark: #111;
+      --dark-2: #1a1a1a;
+      --white: #fff;
+      --muted: #888;
+      --border: rgba(255,255,255,0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--dark); color: var(--white); }
+    img { display: block; width: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* NAV */
+    header { background: #0a0a0a; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    nav { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .logo { font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--red); }
+    .logo span { color: var(--white); }
+    nav ul { display: flex; gap: 2px; }
+    nav ul a { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #aaa; padding: 5px 10px; border-radius: 6px; transition: color .2s, background .2s; }
+    nav ul a:hover, nav ul a.active { color: var(--red); }
+    .nav-icons { display: flex; gap: 4px; }
+    .nav-icons button { background: none; border: none; cursor: pointer; color: #aaa; width: 36px; height: 36px; border-radius: 8px; display: grid; place-items: center; transition: color .2s; }
+    .nav-icons button:hover { color: var(--red); }
+    .nav-icons svg { width: 19px; height: 19px; }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 48px 24px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .page-header h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .page-header h1 span { color: var(--red); }
+    .page-header .arrow {
+      font-size: 1.6rem;
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    /* GALLERY GRID */
+    .gallery-section { padding: 0 24px 60px; max-width: 1100px; margin: 0 auto; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto;
+      gap: 10px;
+    }
+
+    /* Mosaic layout */
+    .g-item { overflow: hidden; border-radius: 10px; cursor: pointer; position: relative; }
+    .g-item img { height: 100%; transition: transform .45s ease, filter .35s; filter: brightness(.92); }
+    .g-item:hover img { transform: scale(1.06); filter: brightness(1); }
+
+    /* overlay on hover */
+    .g-item::after {
+      content: '🔍';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,87,51,.18);
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .g-item:hover::after { opacity: 1; }
+
+    /* Sizes */
+    .g-item { height: 200px; }
+    .g-item.tall { height: 410px; }
+    .g-item.wide { grid-column: span 2; height: 250px; }
+    .g-item.large { grid-column: span 2; grid-row: span 2; height: 410px; }
+
+    /* PAGINATION */
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .pag-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: none;
+      background: var(--dark-2);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background .2s, color .2s;
+    }
+    .pag-btn.active { background: var(--red); color: var(--white); }
+    .pag-btn:hover:not(.active) { background: #2a2a2a; color: var(--white); }
+    .pag-btn svg { width: 16px; height: 16px; }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,.92);
+      place-items: center;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: grid; }
+    .lightbox img {
+      max-width: 90vw; max-height: 88vh;
+      border-radius: 12px;
+      box-shadow: 0 24px 64px rgba(0,0,0,.6);
+      cursor: default;
+      animation: zoomIn .3s ease;
+    }
+    @keyframes zoomIn { from { opacity:0; transform:scale(.85); } to { opacity:1; transform:scale(1); } }
+    .lb-close {
+      position: absolute; top: 20px; right: 24px;
+      background: none; border: none; color: #fff;
+      font-size: 2rem; cursor: pointer; line-height: 1;
+      opacity: .7; transition: opacity .2s;
+    }
+    .lb-close:hover { opacity: 1; }
+
+    @media (max-width: 700px) {
+      nav ul { display: none; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); }
+      .g-item.large { grid-column: span 2; }
+      .g-item.wide  { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav aria-label="Main Navigation">
+    <a href="/" class="logo" aria-label="Trang chủ">Burger<span>VN</span></a>
+    <ul role="list">
+      <li><a href="/">Home</a></li>
+      <li><a href="/shop">Shop</a></li>
+      <li><a href="/reservation">Reservation</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/gallery" class="active" aria-current="page">Gallery</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+    <div class="nav-icons">
+      <button aria-label="Tìm kiếm">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="11" cy="11" r="7" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button aria-label="Tài khoản">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+      </button>
+      <button aria-label="Giỏ hàng">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6h13M10 19a1 1 0 100 2 1 1 0 000-2zm8 0a1 1 0 100 2 1 1 0 000-2z"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1><span>Gallery</span></h1>
+    <span class="arrow">&gt;&gt;</span>
+  </div>
+
+  <section class="gallery-section" aria-label="Thư viện ảnh burger">
+    <div class="gallery-grid" id="galleryGrid">
+
+      <!-- Row 1 -->
+      <figure class="g-item" onclick="openLb(this)">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&auto=format&fit=crop"
+             alt="Beef burger cổ điển với phô mai tan chảy" loading="lazy" />
+      </figure>
+
+      <figure class="g-item large" onclick="openLb(this)">
+        <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=600&auto=format&fit=crop"
+             alt="Bộ sưu tập burger thịt bò tươi ngon" loading="lazy" />
+      </figure>
+
+      <figure class="g-item large" onclick="openLb(this)">
+        <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=600&auto=format&fit=crop"
+             alt="Double burger cao cấp với bánh mì vừng" loading="lazy" />
+      </figure>
+
+      <figure class="g-item" onclick="openLb(this)">
+        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&auto=format&fit=crop"
+             alt="Cheeseburger với cà chua và rau xà lách" loading="lazy" />
+      </figure>
+
+      <!-- Row 2 -->
+      <figure class="g-item" onclick="openLb(this)">
+        <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&auto=format&fit=crop"
+             alt="Burger thịt bò nướng thơm lừng" loading="lazy" />
+      </figure>
+
+      <figure class="g-item wide" onclick="openLb(this)">
+        <img src="https://images.unsplash.com/photo-1603064752734-4c48eff53d05?w=700&auto=format&fit=crop"
+             alt="Burger kèm khoai tây chiên giòn" loading="lazy" />
+      </figure>
+
+      <!-- Row 3 -->
+      <figure class="g-item wide tall" onclick="openLb(this)">
+        <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?w=600&auto=format&fit=crop"
+             alt="Burger hành tím với sốt đặc biệt" loading="lazy" />
+      </figure>
+
+      <figure class="g-item wide" onclick="openLb(this)">
+        <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=600&auto=format&fit=crop"
+             alt="Gourmet burger với sốt mayo đặc biệt" loading="lazy" />
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- PAGINATION -->
+  <nav class="pagination" aria-label="Phân trang gallery">
+    <button class="pag-btn active" aria-label="Trang 1" aria-current="page">1</button>
+    <button class="pag-btn" aria-label="Trang 2">2</button>
+    <button class="pag-btn" aria-label="Trang tiếp theo">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </nav>
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh phóng to" onclick="closeLb(event)">
+  <button class="lb-close" aria-label="Đóng" onclick="closeLb()">✕</button>
+  <img id="lbImg" src="" alt="" />
+</div>
+
+<script>
+  function openLb(fig) {
+    const img = fig.querySelector('img');
+    document.getElementById('lbImg').src = img.src.replace(/w=\d+/, 'w=1200');
+    document.getElementById('lbImg').alt = img.alt;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb(e) {
+    if (!e || e.target !== document.getElementById('lbImg')) {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+  // Pagination visual only
+  document.querySelectorAll('.pag-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.pag-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
