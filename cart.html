@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giỏ Hàng – Cart | Burger VN</title>
+  <meta name="description" content="Xem và quản lý giỏ hàng của bạn tại Burger VN. Thanh toán nhanh, an toàn. Giao hàng toàn quốc." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://tennhahang.vn/cart" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"Giỏ Hàng","url":"https://tennhahang.vn/cart","description":"Trang giỏ hàng – quản lý và thanh toán đơn hàng"}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --orange: #FF5733;
+      --orange-light: #fff3ef;
+      --dark: #111;
+      --white: #fff;
+      --bg: #f5f5f5;
+      --card: #fff;
+      --border: #e8e8e8;
+      --text: #1a1a1a;
+      --muted: #888;
+      --muted-2: #bbb;
+      --red: #e53e3e;
+      --nav-bg: #0a0a0a;
+      --nav-border: rgba(255,255,255,0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--text); }
+    img { display: block; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* NAV */
+    header { background: var(--nav-bg); border-bottom: 1px solid var(--nav-border); position: sticky; top: 0; z-index: 100; }
+    nav { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .logo { font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--orange); }
+    .logo span { color: #fff; }
+    nav ul { display: flex; gap: 2px; }
+    nav ul a { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #aaa; padding: 5px 10px; border-radius: 6px; transition: color .2s; }
+    nav ul a:hover { color: var(--orange); }
+    .nav-icons { display: flex; gap: 4px; }
+    .nav-icons button { background: none; border: none; cursor: pointer; color: #aaa; width: 36px; height: 36px; border-radius: 8px; display: grid; place-items: center; transition: color .2s; }
+    .nav-icons button:hover { color: var(--orange); }
+    .nav-icons svg { width: 19px; height: 19px; }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 20px auto 0;
+      padding: 0 24px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .breadcrumb a { color: var(--orange); }
+    .breadcrumb span { color: var(--muted-2); }
+
+    /* PAGE TITLE */
+    .page-title {
+      max-width: 1200px;
+      margin: 10px auto 20px;
+      padding: 0 24px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cart-count {
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 999px;
+    }
+
+    /* LAYOUT */
+    .cart-layout {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* ── CART LEFT ── */
+    .cart-left { display: flex; flex-direction: column; gap: 12px; }
+
+    /* SELECT ALL BAR */
+    .select-all-bar {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    }
+    .select-all-left { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.88rem; }
+
+    /* Custom checkbox */
+    .cb-wrap { display: flex; align-items: center; cursor: pointer; }
+    .cb-wrap input[type="checkbox"] { display: none; }
+    .cb-box {
+      width: 18px; height: 18px;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+      transition: border-color .2s, background .2s;
+      flex-shrink: 0;
+    }
+    .cb-wrap input:checked + .cb-box { background: var(--orange); border-color: var(--orange); }
+    .cb-wrap input:checked + .cb-box::after { content: '✓'; color: #fff; font-size: 11px; font-weight: 700; line-height: 1; }
+
+    .btn-delete-selected {
+      display: flex; align-items: center; gap: 6px;
+      background: none; border: none;
+      color: var(--muted); font-size: 0.83rem;
+      transition: color .2s;
+    }
+    .btn-delete-selected:hover { color: var(--red); }
+    .btn-delete-selected svg { width: 15px; height: 15px; }
+
+    /* SHOP GROUP */
+    .shop-group {
+      background: var(--card);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    }
+
+    .shop-header {
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+    .shop-tag {
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .shop-name { font-weight: 700; color: var(--text); }
+    .shop-chevron { margin-left: 2px; color: var(--muted); font-size: 0.75rem; }
+
+    .shipping-note {
+      padding: 9px 18px;
+      background: #fff8f6;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--orange);
+    }
+    .shipping-note strong { font-weight: 700; }
+
+    /* CART ITEM */
+    .cart-item {
+      padding: 16px 18px;
+      display: grid;
+      grid-template-columns: 24px 80px 1fr auto auto;
+      gap: 14px;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-item:hover { background: #fafafa; }
+
+    .item-img {
+      width: 80px; height: 80px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .item-info { min-width: 0; }
+    .item-info h3 { font-size: 0.87rem; font-weight: 700; margin-bottom: 4px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .item-info .variant { font-size: 0.76rem; color: var(--muted); }
+
+    .item-price { font-weight: 700; color: var(--orange); font-size: 0.95rem; white-space: nowrap; }
+    .item-price-old { font-size: 0.76rem; color: var(--muted-2); text-decoration: line-through; display: block; }
+
+    /* Quantity control */
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .qty-btn {
+      width: 32px; height: 32px;
+      background: #f5f5f5;
+      border: none;
+      font-size: 1.1rem;
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      transition: background .15s;
+    }
+    .qty-btn:hover { background: var(--orange); color: #fff; }
+    .qty-num {
+      width: 36px; height: 32px;
+      border: none;
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      text-align: center;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      background: #fff;
+      color: var(--text);
+    }
+    .qty-num:focus { outline: none; }
+
+    .btn-remove {
+      background: none; border: none;
+      color: var(--muted-2);
+      padding: 4px;
+      display: grid; place-items: center;
+      transition: color .2s;
+    }
+    .btn-remove:hover { color: var(--red); }
+    .btn-remove svg { width: 16px; height: 16px; }
+
+    /* ── CART RIGHT (Summary) ── */
+    .cart-summary {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+      position: sticky;
+      top: 78px;
+    }
+    .cart-summary h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+      color: var(--text);
+      gap: 8px;
+    }
+    .summary-row .label { color: var(--muted); }
+    .summary-row .val { font-weight: 700; text-align: right; }
+    .summary-row .val.orange { color: var(--orange); }
+    .summary-row .val.strike { text-decoration: line-through; color: var(--muted-2); }
+
+    .summary-divider { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .summary-total .total-val { color: var(--orange); font-size: 1.15rem; }
+
+    .summary-vat { font-size: 0.74rem; color: var(--muted); text-align: right; margin-bottom: 18px; }
+
+    .btn-checkout {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: var(--orange);
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 8px;
+      transition: background .2s, transform .2s;
+      text-align: center;
+    }
+    .btn-checkout:hover { background: #D94528; transform: translateY(-2px); }
+
+    .btn-checkout:disabled {
+      background: var(--muted-2);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* EMPTY STATE */
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: none;
+    }
+    .empty-state.show { display: block; }
+    .empty-state svg { width: 48px; height: 48px; margin: 0 auto 14px; color: var(--muted-2); }
+
+    @media (max-width: 860px) {
+      nav ul { display: none; }
+      .cart-layout { grid-template-columns: 1fr; }
+      .cart-summary { position: static; }
+      .cart-item { grid-template-columns: 24px 64px 1fr; }
+      .item-price, .qty-control, .btn-remove { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav aria-label="Main Navigation">
+    <a href="/" class="logo">Burger<span>VN</span></a>
+    <ul role="list">
+      <li><a href="/">Home</a></li>
+      <li><a href="/shop">Shop</a></li>
+      <li><a href="/reservation">Reservation</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+    <div class="nav-icons">
+      <button aria-label="Tìm kiếm"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="11" cy="11" r="7" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke-width="2" stroke-linecap="round"/></svg></button>
+      <button aria-label="Tài khoản" onclick="window.location.href='login.html'">
+  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+</button>
+
+      <button aria-label="Giỏ hàng" onclick="window.location.href='cart.html'">
+  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6h13M10 19a1 1 0 100 2 1 1 0 000-2zm8 0a1 1 0 100 2 1 1 0 000-2z"/></svg>
+</button>
+  </nav>
+</header>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">Trang chủ</a>
+  <span>›</span>
+  <span aria-current="page">Giỏ hàng</span>
+</nav>
+
+<div class="page-title">
+  <span>Giỏ hàng</span>
+  <span class="cart-count" id="cartCount">3 sản phẩm</span>
+</div>
+
+<div class="cart-layout">
+
+  <!-- LEFT: Cart Items -->
+  <div class="cart-left" id="cartLeft">
+
+    <!-- SELECT ALL -->
+    <div class="select-all-bar">
+      <div class="select-all-left">
+        <label class="cb-wrap" aria-label="Chọn tất cả sản phẩm">
+          <input type="checkbox" id="checkAll" onchange="toggleAll(this)" />
+          <span class="cb-box"></span>
+        </label>
+        <span>CHỌN TẤT CẢ (3 SẢN PHẨM)</span>
+      </div>
+      <button class="btn-delete-selected" onclick="deleteSelected()" aria-label="Xóa sản phẩm đã chọn">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+        XÓA
+      </button>
+    </div>
+
+<div class="shop-group" id="shop1">
+      <div class="shop-header">
+        <label class="cb-wrap" aria-label="Chọn tất cả sản phẩm Burger">
+          <input type="checkbox" class="shop-check" data-shop="shop1" onchange="toggleShop(this,'shop1')" />
+          <span class="cb-box"></span>
+        </label>
+        <span class="shop-tag">HOT</span>
+        <span class="shop-name">Burger Special Kitchen</span>
+        <span class="shop-chevron">›</span>
+      </div>
+      <div class="cart-item" data-shop="shop1" data-price="55000" data-id="item1">
+        <label class="cb-wrap" aria-label="Chọn sản phẩm">
+          <input type="checkbox" class="item-check" onchange="updateSummary()" />
+          <span class="cb-box"></span>
+        </label>
+        <img class="item-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&auto=format&fit=crop" alt="Beef Burger Classic" loading="lazy" />
+        <div class="item-info">
+          <h3>Beef Burger Classic (Thịt bò nướng, Phô mai)</h3>
+          <span class="variant">Size: L | Extra Cheese</span>
+        </div>
+        <div>
+          <span class="item-price">55.000₫</span>
+          <span class="item-price-old">65.000₫</span>
+        </div>
+        <div class="qty-control" role="group" aria-label="Số lượng">
+          <button class="qty-btn" onclick="changeQty(this,-1)" aria-label="Giảm số lượng">−</button>
+          <input class="qty-num" type="number" value="1" min="1" max="99" aria-label="Số lượng" onchange="updateSummary()" />
+          <button class="qty-btn" onclick="changeQty(this,1)" aria-label="Tăng số lượng">+</button>
+        </div>
+        <button class="btn-remove" onclick="removeItem(this,'shop1')" aria-label="Xóa sản phẩm khỏi giỏ hàng">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="shop-group" id="shop2">
+      <div class="shop-header">
+        <label class="cb-wrap" aria-label="Chọn tất cả sản phẩm Pizza">
+          <input type="checkbox" class="shop-check" data-shop="shop2" onchange="toggleShop(this,'shop2')" />
+          <span class="cb-box"></span>
+        </label>
+        <span class="shop-tag">SALE</span>
+        <span class="shop-name">Pizza World Delivery</span>
+        <span class="shop-chevron">›</span>
+      </div>
+      <div class="cart-item" data-shop="shop2" data-price="120000" data-id="item2">
+        <label class="cb-wrap" aria-label="Chọn sản phẩm">
+          <input type="checkbox" class="item-check" onchange="updateSummary()" />
+          <span class="cb-box"></span>
+        </label>
+        <img class="item-img" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&auto=format&fit=crop" alt="Hawaii Pizza" loading="lazy" />
+        <div class="item-info">
+          <h3>Hawaii Pizza (Dứa, Thịt xông khói, Mozzarella)</h3>
+          <span class="variant">Đế dày | 9 inch</span>
+        </div>
+        <div>
+          <span class="item-price">120.000₫</span>
+          <span class="item-price-old">150.000₫</span>
+        </div>
+        <div class="qty-control" role="group" aria-label="Số lượng">
+          <button class="qty-btn" onclick="changeQty(this,-1)" aria-label="Giảm số lượng">−</button>
+          <input class="qty-num" type="number" value="1" min="1" max="99" aria-label="Số lượng" onchange="updateSummary()" />
+          <button class="qty-btn" onclick="changeQty(this,1)" aria-label="Tăng số lượng">+</button>
+        </div>
+        <button class="btn-remove" onclick="removeItem(this,'shop2')" aria-label="Xóa sản phẩm khỏi giỏ hàng">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="empty-state" id="emptyState">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.5 6h13M10 19a1 1 0 100 2 1 1 0 000-2zm8 0a1 1 0 100 2 1 1 0 000-2z"/></svg>
+      <p>Giỏ hàng của bạn đang trống</p>
+      <a href="/shop" style="color:var(--orange);font-weight:700;margin-top:10px;display:inline-block;">→ Tiếp tục mua sắm</a>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: Summary -->
+  <aside class="cart-summary" aria-label="Thông tin đơn hàng">
+    <h2>Thông tin đơn hàng</h2>
+
+    <div class="summary-row">
+      <span class="label">Tạm tính (<span id="selCount">0</span> sản phẩm)</span>
+      <span class="val" id="subTotal">0 ₫</span>
+    </div>
+    <div class="summary-row">
+      <span class="label">Giảm giá</span>
+      <span class="val orange" id="discount">0 ₫</span>
+    </div>
+
+    <hr class="summary-divider" />
+
+    <div class="summary-total">
+      <span>Tổng cộng</span>
+      <span class="total-val" id="grandTotal">0 ₫</span>
+    </div>
+    <p class="summary-vat">(Đã bao gồm VAT nếu có)</p>
+
+    <button class="btn-checkout" id="btnCheckout" disabled onclick="checkout()" aria-label="Thanh toán ngay">
+      Thanh toán ngay
+    </button>
+  </aside>
+
+</div>
+
+<script>
+  function fmt(n) {
+    return n.toLocaleString('vi-VN') + ' ₫';
+  }
+
+  function changeQty(btn, delta) {
+    const input = btn.parentElement.querySelector('.qty-num');
+    let v = parseInt(input.value) + delta;
+    if (v < 1) v = 1;
+    input.value = v;
+    updateSummary();
+  }
+
+  function updateSummary() {
+    let selected = 0, total = 0;
+    document.querySelectorAll('.cart-item').forEach(item => {
+      const cb = item.querySelector('.item-check');
+      if (cb && cb.checked) {
+        const price = parseInt(item.dataset.price) || 0;
+        const qty = parseInt(item.querySelector('.qty-num').value) || 1;
+        total += price * qty;
+        selected++;
+      }
+    });
+    document.getElementById('selCount').textContent = selected;
+    document.getElementById('subTotal').textContent = fmt(total);
+    const disc = Math.round(total * 0.05);
+    document.getElementById('discount').textContent = '- ' + fmt(disc);
+    document.getElementById('grandTotal').textContent = fmt(total - disc);
+    document.getElementById('btnCheckout').disabled = selected === 0;
+
+    // sync checkAll
+    const all = document.querySelectorAll('.item-check');
+    const checked = document.querySelectorAll('.item-check:checked');
+    document.getElementById('checkAll').checked = all.length > 0 && all.length === checked.length;
+  }
+
+  function toggleAll(master) {
+    document.querySelectorAll('.item-check, .shop-check').forEach(cb => { cb.checked = master.checked; });
+    updateSummary();
+  }
+
+  function toggleShop(cb, shopId) {
+    document.querySelectorAll(`#${shopId} .item-check`).forEach(c => { c.checked = cb.checked; });
+    updateSummary();
+  }
+
+  function removeItem(btn, shopId) {
+    const item = btn.closest('.cart-item');
+    item.style.opacity = '0';
+    item.style.transition = 'opacity .25s';
+    setTimeout(() => {
+      item.remove();
+      const shop = document.getElementById(shopId);
+      if (!shop.querySelector('.cart-item')) shop.remove();
+      countItems();
+      updateSummary();
+    }, 250);
+  }
+
+  function deleteSelected() {
+    document.querySelectorAll('.item-check:checked').forEach(cb => {
+      const item = cb.closest('.cart-item');
+      const shopId = item.dataset.shop;
+      removeItem(item.querySelector('.btn-remove'), shopId);
+    });
+  }
+
+  function countItems() {
+    const total = document.querySelectorAll('.cart-item').length;
+    document.getElementById('cartCount').textContent = total + ' sản phẩm';
+    document.querySelector('.select-all-bar span').textContent = `CHỌN TẤT CẢ (${total} SẢN PHẨM)`;
+    if (total === 0) {
+      document.getElementById('emptyState').classList.add('show');
+      document.querySelector('.select-all-bar').style.display = 'none';
+    }
+  }
+
+  function checkout() {
+    alert('🎉 Đang chuyển đến trang thanh toán...');
+  }
+</script>
+</body>
+</html>
