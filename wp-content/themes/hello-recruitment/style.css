@@ -1,0 +1,4177 @@
+/*
+Theme Name: Hello Recruitment Child Theme
+Theme URI: ../../../
+Description: A premium, modern tech recruitment child theme for Hello Elementor.
+Author: Antigravity AI
+Author URI: https://github.com/google-deepmind
+Template: hello-elementor
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: hello-recruitment
+*/
+
+/* ==========================================================================
+   1. DESIGN SYSTEM & VARIABLE DEFINITIONS
+   ========================================================================== */
+:root {
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
+
+    /* Sleek Harmonious Tech Palette (HSL-based) */
+    --clr-primary: hsl(224, 95%, 60%);       /* Vibrant Tech Indigo */
+    --clr-primary-glow: hsla(224, 95%, 60%, 0.15);
+    --clr-secondary: hsl(263, 90%, 62%);     /* Deep Electric Violet */
+    --clr-accent: hsl(172, 90%, 46%);        /* Cyber Neon Cyan */
+    --clr-accent-glow: hsla(172, 90%, 46%, 0.2);
+
+    /* Neutral Slate Tones for Superior Contrast */
+    --clr-bg-dark: hsl(222, 47%, 9%);         /* Midnight Deep Blue */
+    --clr-bg-card: hsla(223, 47%, 14%, 0.8);   /* Dark Card Background */
+    --clr-border: hsla(217, 32%, 18%, 0.85);   /* Fine Slate Border */
+    --clr-border-glow: hsla(224, 95%, 60%, 0.4);
+
+    --clr-text-main: hsl(210, 40%, 98%);     /* Bright Crisp White */
+    --clr-text-muted: hsl(215, 20%, 75%);    /* Silver Slate Gray */
+    --clr-text-dim: hsl(215, 16%, 55%);      /* Dim Gray */
+
+    /* Glassmorphism Tokens */
+    --glass-bg: rgba(15, 23, 42, 0.75);       /* Sleek slate transparent */
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --glass-blur: blur(16px);
+
+    /* Animation and Borders */
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Force entire website to use Montserrat bold-vietnamese font */
+body, h1, h2, h3, h4, h5, h6, p, a, span, button, input, select, textarea, li, label, strong, em, div {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Exclude FontAwesome icons from the global Montserrat font override */
+.fa, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands, [class^="fa-"], [class*=" fa-"], [class^="fa-"]::before, [class*=" fa-"]::before {
+    font-family: "Font Awesome 5 Free", "Font Awesome 5 Brands", "Font Awesome 6 Free", "Font Awesome 6 Brands", "FontAwesome" !important;
+}
+.fab, .fa-brands {
+    font-family: "Font Awesome 5 Brands", "Font Awesome 6 Brands" !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700 !important;
+}
+
+/* ==========================================================================
+   2. CORE BASE STYLING
+   ========================================================================== */
+html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+}
+
+body {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--clr-text-muted);
+    background: linear-gradient(135deg, #05070f 0%, #0a081a 50%, #03040a 100%) !important;
+    background-attachment: fixed !important;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--clr-text-main);
+    font-weight: 700;
+}
+
+/* Custom Scrollbar for high-end feel */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0b0f19;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--clr-border);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--clr-primary);
+}
+
+/* ==========================================================================
+   3. HEADER - PREMIUM GLASSMORPHISM
+   ========================================================================== */
+.rec-header-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    transition: var(--transition-smooth);
+    padding: 10px 0 !important; /* Premium ultra-compact padding */
+}
+
+/* Scrolled Sticky Header Class */
+.rec-header-wrapper.is-scrolled {
+    padding: 6px 0 !important; /* Ultra-compact on scroll */
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+.rec-header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative !important; /* Reference for centering megamenu */
+}
+
+/* Elegant Tech Logo */
+.rec-logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--clr-text-main);
+}
+
+.rec-logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+    color: #fff;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.rec-logo-icon::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform: rotate(45deg);
+    animation: logo-shimmer 3s infinite linear;
+}
+
+@keyframes logo-shimmer {
+    0% { transform: translate(-50%, -50%) rotate(45deg); }
+    100% { transform: translate(50%, 50%) rotate(45deg); }
+}
+
+.rec-logo-text span {
+    background: linear-gradient(to right, var(--clr-text-main), var(--clr-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Nav Menu Styles */
+.rec-nav {
+    display: flex;
+    align-items: center;
+    gap: 40px !important; /* Spacious gap */
+}
+
+.rec-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 36px !important; /* Spacious gap */
+}
+
+.rec-nav-item {
+    position: relative;
+}
+
+.rec-nav-item-megamenu {
+    position: static !important; /* Un-anchor so megamenu centers relative to container */
+}
+
+.rec-nav-link {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--clr-text-muted);
+    text-decoration: none;
+    padding: 8px 0;
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.rec-nav-link:hover,
+.rec-nav-item.is-active .rec-nav-link {
+    color: var(--clr-text-main);
+}
+
+.rec-nav-link i {
+    font-size: 12px;
+    transition: var(--transition-smooth);
+}
+
+.rec-nav-item:hover .rec-nav-link i {
+    transform: rotate(180deg);
+    color: var(--clr-accent);
+}
+
+/* Link Glow Underline */
+.rec-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--clr-primary), var(--clr-accent));
+    transition: var(--transition-smooth);
+    border-radius: 2px;
+}
+
+.rec-nav-item:hover .rec-nav-link::after {
+    width: 100%;
+}
+
+/* Header Right Actions */
+.rec-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Expandable Smart Search Bar */
+.rec-search-form {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.rec-search-input {
+    width: 160px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    padding: 8px 16px 8px 36px;
+    font-size: 13px;
+    color: var(--clr-text-main);
+    transition: var(--transition-smooth);
+    outline: none;
+}
+
+.rec-search-input:focus {
+    width: 240px;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 15px var(--clr-primary-glow);
+}
+
+.rec-search-icon {
+    position: absolute;
+    left: 14px;
+    color: var(--clr-text-dim);
+    font-size: 12px;
+    pointer-events: none;
+    transition: var(--transition-smooth);
+}
+
+.rec-search-input:focus + .rec-search-icon {
+    color: var(--clr-accent);
+}
+
+/* Premium Glowing CTA Button */
+.rec-btn {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 30px;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.rec-btn-primary {
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.rec-btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--clr-secondary), var(--clr-primary));
+    opacity: 0;
+    z-index: -1;
+    transition: var(--transition-smooth);
+}
+
+.rec-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(99, 102, 241, 0.5);
+}
+
+.rec-btn-primary:hover::before {
+    opacity: 1;
+}
+
+/* Mobile Toggle Hamburger */
+.rec-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10000;
+}
+
+.rec-menu-toggle span {
+    width: 100%;
+    height: 2px;
+    background-color: var(--clr-text-main);
+    transition: var(--transition-smooth);
+    border-radius: 2px;
+}
+
+/* Hamburger Active State */
+.rec-menu-toggle.is-active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.rec-menu-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.rec-menu-toggle.is-active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   4. MEGAMENU - PREMIUM MULTI-COLUMN DESIGN
+   ========================================================================== */
+.rec-megamenu-panel {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    width: min(1300px, 95vw); /* Wider, spacious, and extremely premium megamenu */
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--radius-md);
+    padding: 36px 40px; /* Spacious internal padding */
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.3fr;
+    gap: 36px; /* Premium larger gaps */
+    align-items: start !important; /* Force all columns to align at the top of the grid container */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 9998;
+}
+
+.rec-mm-col {
+    align-self: start !important; /* Lock each column grid item to start at the top */
+}
+
+/* Safe hovering bridge created directly on the panel itself.
+   Since it extends UPWARDS, it flawlessly bridges any height gaps, 
+   ensuring the menu never disappears when the mouse hovers down. */
+.rec-megamenu-panel::before {
+    content: '';
+    position: absolute;
+    top: -50px; /* Extends UPWARDS all the way to the navigation link to prevent hover loss */
+    left: 0;
+    width: 100%;
+    height: 50px; /* Safe hover zone bridge */
+    background: transparent;
+    display: block;
+    z-index: 10;
+}
+
+/* Hover trigger actions for Megamenu */
+.rec-nav-item-megamenu:hover .rec-megamenu-panel,
+.rec-nav-item-megamenu.is-hovered .rec-megamenu-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Fallback safe hovering bridge removed to prevent accidental full-width trigger bugs */
+
+/* Megamenu Common Headers */
+.rec-mm-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--clr-accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+}
+
+/* Column 1: Job Categories */
+.rec-mm-cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.rec-mm-cat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    background: rgba(255,255,255,0.02);
+    border: 1px solid transparent;
+    transition: var(--transition-smooth);
+}
+
+.rec-mm-cat-item:hover {
+    background: rgba(99, 102, 241, 0.08);
+    border-color: rgba(99, 102, 241, 0.2);
+    transform: translateY(-2px);
+}
+
+.rec-mm-cat-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--clr-text-muted);
+    font-size: 14px;
+    transition: var(--transition-smooth);
+}
+
+.rec-mm-cat-item:hover .rec-mm-cat-icon {
+    background: var(--clr-primary);
+    color: #fff;
+}
+
+.rec-mm-cat-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--clr-text-muted);
+    transition: var(--transition-smooth);
+}
+
+.rec-mm-cat-item:hover .rec-mm-cat-name {
+    color: var(--clr-text-main);
+}
+
+/* Column 2: Tech Companies */
+.rec-mm-comp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rec-mm-comp-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    background: rgba(255,255,255,0.01);
+    border: 1px solid rgba(255,255,255,0.03);
+    transition: var(--transition-smooth);
+}
+
+.rec-mm-comp-item:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: var(--clr-border);
+    transform: translateX(4px);
+}
+
+.rec-mm-comp-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rec-mm-comp-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--clr-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 12px;
+    color: var(--clr-text-main);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.rec-mm-comp-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.rec-mm-comp-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--clr-text-main);
+}
+
+.rec-mm-comp-jobs {
+    font-size: 11px;
+    color: var(--clr-accent);
+    font-weight: 500;
+}
+
+.rec-mm-comp-arrow {
+    color: var(--clr-text-dim);
+    font-size: 11px;
+    transition: var(--transition-smooth);
+}
+
+.rec-mm-comp-item:hover .rec-mm-comp-arrow {
+    color: var(--clr-accent);
+    transform: translateX(2px);
+}
+
+/* Column 3: Featured Interactive Job Card */
+.rec-mm-feat-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.05) 100%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.rec-mm-feat-card::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--clr-primary-glow) 0%, transparent 70%);
+    filter: blur(10px);
+}
+
+.rec-mm-feat-badge {
+    align-self: flex-start;
+    background: linear-gradient(to right, var(--clr-accent), hsl(172, 90%, 35%));
+    color: #0b0f19;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px var(--clr-accent-glow);
+}
+
+.rec-mm-feat-title {
+    font-size: 16px;
+    color: var(--clr-text-main);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.rec-mm-feat-company {
+    font-size: 13px;
+    color: var(--clr-text-muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.rec-mm-feat-company i {
+    color: var(--clr-primary);
+}
+
+.rec-mm-feat-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.rec-mm-feat-tag {
+    font-size: 11px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: var(--clr-text-muted);
+}
+
+.rec-mm-feat-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 16px;
+}
+
+.rec-mm-feat-salary {
+    font-size: 15px;
+    color: var(--clr-text-main);
+    font-weight: 800;
+}
+
+.rec-mm-feat-salary span {
+    font-size: 11px;
+    color: var(--clr-text-dim);
+    font-weight: 500;
+}
+
+.rec-mm-feat-apply {
+    color: var(--clr-accent);
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition-smooth);
+}
+
+.rec-mm-feat-apply:hover {
+    color: var(--clr-text-main);
+}
+
+.rec-mm-feat-apply i {
+    transition: var(--transition-smooth);
+}
+
+.rec-mm-feat-apply:hover i {
+    transform: translateX(4px);
+}
+
+/* ==========================================================================
+   5. FOOTER - SLICK DARK MODE DESIGN
+   ========================================================================== */
+.rec-footer {
+    background-color: var(--clr-bg-dark);
+    padding: 80px 0 30px;
+    border-top: 1px solid var(--clr-border);
+    position: relative;
+    overflow: hidden;
+    margin-top: 100px !important; /* Premium spacing to prevent sticking to body (Screenshot 9) */
+}
+
+/* Subtle glowing aura in footer */
+.rec-footer::before {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: 10%;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--clr-primary-glow) 0%, transparent 70%);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.rec-footer::after {
+    content: '';
+    position: absolute;
+    top: -150px;
+    right: 5%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--clr-accent-glow) 0%, transparent 70%);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.rec-footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.rec-footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+/* Column 1: Info */
+.rec-footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.rec-footer-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--clr-text-muted);
+}
+
+.rec-footer-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.rec-footer-social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--glass-border);
+    color: var(--clr-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: var(--transition-smooth);
+}
+
+.rec-footer-social-link:hover {
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-3px) rotate(8deg);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+/* Columns 2 & 3: Link lists */
+.rec-footer-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--clr-text-main);
+    margin-bottom: 24px;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.rec-footer-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--clr-accent);
+}
+
+.rec-footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rec-footer-link a {
+    font-size: 14px;
+    color: var(--clr-text-muted);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    display: inline-block;
+}
+
+.rec-footer-link a:hover {
+    color: var(--clr-accent);
+    transform: translateX(4px);
+}
+
+/* Column 4: Newsletter */
+.rec-footer-newsletter {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.rec-footer-newsletter p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.rec-newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+
+.rec-newsletter-input-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.rec-newsletter-input {
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    padding: 12px 18px;
+    font-size: 13px;
+    color: var(--clr-text-main);
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+.rec-newsletter-input:focus {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--clr-accent);
+    box-shadow: 0 0 15px var(--clr-accent-glow);
+}
+
+.rec-newsletter-btn {
+    background: linear-gradient(135deg, var(--clr-accent), hsl(172, 90%, 35%));
+    color: #0b0f19;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 12px 24px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px var(--clr-accent-glow);
+}
+
+.rec-newsletter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--clr-accent-glow);
+    background: linear-gradient(135deg, hsl(172, 90%, 55%), var(--clr-accent));
+}
+
+.rec-newsletter-msg {
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
+}
+
+.rec-newsletter-msg.is-success {
+    display: block;
+    color: var(--clr-accent);
+}
+
+/* Footer Bottom */
+.rec-footer-bottom {
+    border-top: 1px solid var(--clr-border);
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rec-footer-copyright {
+    font-size: 13px;
+    color: var(--clr-text-dim);
+}
+
+.rec-footer-bottom-links {
+    display: flex;
+    gap: 20px;
+}
+
+.rec-footer-bottom-link a {
+    font-size: 13px;
+    color: var(--clr-text-dim);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.rec-footer-bottom-link a:hover {
+    color: var(--clr-text-muted);
+}
+
+
+/* ==========================================================================
+   6. HOMEPAGE HERO SECTION
+   ========================================================================== */
+.rec-hero-section {
+    position: relative;
+    padding: 140px 0 100px;
+    background-color: #080b11;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(20, 184, 166, 0.08) 0%, transparent 50%);
+}
+
+.rec-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+
+.rec-hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.rec-hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.rec-hero-badge {
+    align-self: flex-start;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    color: var(--clr-accent);
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rec-hero-badge i {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.rec-hero-title {
+    font-size: 58px;
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    margin: 0;
+}
+
+.rec-hero-title span {
+    background: linear-gradient(135deg, var(--clr-accent) 0%, var(--clr-primary) 50%, var(--clr-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.rec-hero-desc {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--clr-text-muted);
+    margin: 0;
+}
+
+/* Premium Main Search Module */
+.rec-main-search-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--glass-blur);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    box-shadow: var(--glass-shadow);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.rec-search-col {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.rec-search-col i {
+    position: absolute;
+    left: 14px;
+    color: var(--clr-text-dim);
+    font-size: 14px;
+}
+
+.rec-search-col input,
+.rec-search-col select {
+    width: 100%;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius-sm);
+    padding: 12px 12px 12px 38px;
+    color: var(--clr-text-main);
+    font-size: 14px;
+    outline: none;
+    transition: var(--transition-smooth);
+    box-sizing: border-box;
+}
+
+.rec-search-col select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.rec-search-col input:focus,
+.rec-search-col select:focus {
+    border-color: var(--clr-accent);
+    background: rgba(255,255,255,0.05);
+}
+
+.rec-hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 10px;
+}
+
+.rec-stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.rec-stat-num {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--clr-text-main);
+}
+
+.rec-stat-num span {
+    color: var(--clr-accent);
+}
+
+.rec-stat-lbl {
+    font-size: 13px;
+    color: var(--clr-text-dim);
+}
+
+/* Hero Right Side Decorative Visual */
+.rec-hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.rec-visual-glow {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, var(--clr-primary-glow) 0%, transparent 70%);
+    filter: blur(20px);
+    z-index: 1;
+}
+
+.rec-visual-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.06) 100%);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--glass-blur);
+    border-radius: var(--radius-lg);
+    padding: 30px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: var(--glass-shadow);
+    z-index: 2;
+    position: relative;
+    animation: hero-float 6s ease-in-out infinite;
+}
+
+@keyframes hero-float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(1deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.rec-vcard-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.rec-vcard-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--clr-accent), var(--clr-primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 20px;
+    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+}
+
+.rec-vcard-info h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.rec-vcard-info p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--clr-accent);
+}
+
+.rec-vcard-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.rec-vitem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+}
+
+.rec-vitem-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rec-vitem-icon {
+    color: var(--clr-accent);
+    font-size: 14px;
+}
+
+.rec-vitem-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.rec-vitem-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--clr-text-main);
+}
+
+.rec-vitem-sub {
+    font-size: 11px;
+    color: var(--clr-text-dim);
+}
+
+.rec-vitem-status {
+    font-size: 11px;
+    background: rgba(20, 184, 166, 0.1);
+    color: var(--clr-accent);
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+
+/* ==========================================================================
+   7. HOMEPAGE SECTIONS - LAYOUTS & TITLES
+   ========================================================================== */
+.rec-section {
+    padding: 50px 0 !important; /* Compact spacing to prevent sections sticking together (Screenshot 7) */
+    background-color: transparent !important;
+    position: relative;
+}
+
+.rec-section-alt {
+    padding: 50px 0 !important; /* Compact spacing to prevent sections sticking together (Screenshot 7) */
+    background-color: rgba(10, 8, 26, 0.45) !important;
+    backdrop-filter: blur(10px) !important;
+    position: relative;
+}
+
+/* Global breathing space for any top-level Elementor sections/containers (Screenshot 7) */
+.elementor-top-section:not(.rec-hero-section),
+.e-con.e-parent:not(.rec-hero-section) {
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+}
+
+.rec-section-header {
+    max-width: 600px;
+    margin: 0 auto 60px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.rec-sub-title {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--clr-accent);
+    background: rgba(20, 184, 166, 0.08);
+    padding: 4px 12px;
+    border-radius: 30px;
+}
+
+.rec-sec-title {
+    font-size: 38px;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.rec-sec-desc {
+    font-size: 15px;
+    color: var(--clr-text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+/* ==========================================================================
+   8. CATEGORIES GRID
+   ========================================================================== */
+.rec-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.rec-cat-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: var(--transition-smooth);
+}
+
+.rec-cat-card:hover {
+    background: rgba(99, 102, 241, 0.04);
+    border-color: rgba(99, 102, 241, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.rec-cat-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.03);
+    color: var(--clr-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: var(--transition-smooth);
+    border: 1px solid transparent;
+}
+
+.rec-cat-card:hover .rec-cat-card-icon {
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.rec-cat-card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.rec-cat-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--clr-text-main);
+    margin: 0;
+    transition: var(--transition-smooth);
+}
+
+.rec-cat-card:hover .rec-cat-card-title {
+    color: var(--clr-accent);
+}
+
+.rec-cat-card-count {
+    font-size: 13px;
+    color: var(--clr-text-dim);
+}
+
+
+/* ==========================================================================
+   9. HOT JOBS GRID & CARD
+   ========================================================================== */
+.rec-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+    padding: 0 24px;
+}
+
+.rec-job-card {
+    background: var(--clr-bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.rec-job-card:hover {
+    border-color: rgba(20, 184, 166, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.rec-job-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.rec-job-card-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.rec-job-card-badge {
+    background: rgba(20, 184, 166, 0.1);
+    color: var(--clr-accent);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.rec-job-card-body h3 {
+    font-size: 19px;
+    margin: 0 0 6px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.rec-job-card-company {
+    font-size: 14px;
+    color: var(--clr-text-muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.rec-job-card-company i {
+    color: var(--clr-primary);
+}
+
+.rec-job-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.rec-job-card-tag {
+    font-size: 11px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: var(--clr-text-dim);
+}
+
+.rec-job-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 16px;
+}
+
+.rec-job-card-salary {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--clr-text-main);
+}
+
+.rec-job-card-salary span {
+    font-size: 11px;
+    color: var(--clr-text-dim);
+    font-weight: 500;
+}
+
+.rec-job-card-apply {
+    color: var(--clr-accent);
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition-smooth);
+}
+
+.rec-job-card-apply:hover {
+    color: var(--clr-text-main);
+}
+
+.rec-job-card-apply i {
+    transition: var(--transition-smooth);
+}
+
+.rec-job-card-apply:hover i {
+    transform: translateX(4px);
+}
+
+/* Center Bottom Link Container */
+.rec-sec-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+/* ==========================================================================
+   10. POPULAR COMPANIES GRID
+   ========================================================================== */
+.rec-grid-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.rec-comp-card {
+    background: rgba(255,255,255,0.01);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.rec-comp-card:hover {
+    background: rgba(255,255,255,0.03);
+    border-color: var(--clr-accent);
+    transform: translateY(-4px);
+}
+
+.rec-comp-card-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.rec-comp-card-info h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--clr-text-main);
+    margin: 0 0 4px;
+}
+
+.rec-comp-card-info p {
+    font-size: 12px;
+    color: var(--clr-text-dim);
+    margin: 0;
+}
+
+.rec-comp-card-btn {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--clr-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    transition: var(--transition-smooth);
+}
+
+.rec-comp-card:hover .rec-comp-card-btn {
+    color: var(--clr-text-main);
+}
+
+
+/* ==========================================================================
+   11. RESPONSIVE MEDIA QUERIES (MOBILE AND TABLET STYLING)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .rec-megamenu-panel {
+        width: 90%;
+        max-width: 700px;
+        grid-template-columns: 1fr 1fr;
+    }
+    .rec-mm-feat-card {
+        grid-column: span 2;
+        height: auto;
+    }
+    .rec-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .rec-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .rec-grid-5 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Responsive Header & Navigation */
+    .rec-header-wrapper {
+        padding: 15px 0;
+    }
+    .rec-menu-toggle {
+        display: flex;
+    }
+    
+    .rec-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background: hsl(222, 47%, 7%);
+        border-left: 1px solid var(--clr-border);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        padding: 80px 30px 40px;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 9999;
+    }
+    
+    .rec-nav.is-active {
+        right: 0;
+    }
+    
+    .rec-nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 16px;
+    }
+    
+    .rec-nav-item {
+        width: 100%;
+    }
+    
+    .rec-nav-link {
+        width: 100%;
+        font-size: 18px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .rec-nav-link::after {
+        display: none;
+    }
+    
+    .rec-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+    }
+    
+    .rec-search-form, .rec-search-input {
+        width: 100% !important;
+    }
+    
+    .rec-btn {
+        width: 100%;
+    }
+
+    /* Disable panel hover on mobile and handle through click if needed */
+    .rec-megamenu-panel {
+        position: static;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        width: 100%;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        padding: 15px 0 0 15px;
+        display: none; /* Controlled by JS toggle */
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .rec-nav-item-megamenu.is-open .rec-megamenu-panel {
+        display: grid;
+    }
+    
+    .rec-mm-feat-card {
+        grid-column: span 1;
+    }
+    
+    .rec-mm-cat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Footer Responsive */
+    .rec-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .rec-footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .rec-footer-bottom-links {
+        justify-content: center;
+    }
+
+    /* Homepage Responsive */
+    .rec-hero-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .rec-hero-badge {
+        align-self: center;
+    }
+    
+    .rec-hero-title {
+        font-size: 38px;
+    }
+    
+    .rec-main-search-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .rec-hero-stats {
+        justify-content: center;
+        gap: 24px;
+    }
+    
+    .rec-hero-visual {
+        display: none; /* Hide on mobile to focus on content */
+    }
+    
+    .rec-sec-title {
+        font-size: 30px;
+    }
+    
+    .rec-grid-4, .rec-grid-3, .rec-grid-5 {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* ==========================================================================
+   12. ABSOLUTE BRAND COLOR OVERRIDES (ELIMINATING ORANGE)
+   ========================================================================== */
+/* Global Anchor Hover State - Ensure no orange hover links */
+a, a:visited {
+    transition: var(--transition-smooth);
+}
+a:hover {
+    color: var(--clr-accent) !important;
+}
+
+/* Header & Megamenu Brand Overrides */
+.rec-header-wrapper a,
+.rec-header-wrapper span,
+.rec-header-wrapper i,
+.rec-header-wrapper button {
+    color: inherit;
+}
+
+.rec-logo-text {
+    color: var(--clr-text-main) !important;
+}
+.rec-logo-text span {
+    background: linear-gradient(to right, var(--clr-text-main), var(--clr-accent)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.rec-nav-link {
+    color: var(--clr-text-muted) !important;
+}
+.rec-nav-link:hover,
+.rec-nav-item.is-active .rec-nav-link {
+    color: var(--clr-text-main) !important;
+}
+.rec-nav-item:hover .rec-nav-link i {
+    color: var(--clr-accent) !important;
+}
+
+.rec-search-col i {
+    color: var(--clr-text-dim) !important;
+}
+.rec-search-input:focus + .rec-search-icon {
+    color: var(--clr-accent) !important;
+}
+
+/* Megamenu Elements */
+.rec-mm-title {
+    color: var(--clr-accent) !important;
+}
+.rec-mm-cat-name {
+    color: var(--clr-text-muted) !important;
+}
+.rec-mm-cat-item:hover .rec-mm-cat-name {
+    color: var(--clr-text-main) !important;
+}
+.rec-mm-comp-name {
+    color: var(--clr-text-main) !important;
+}
+.rec-mm-comp-jobs {
+    color: var(--clr-accent) !important;
+}
+.rec-mm-feat-title {
+    color: var(--clr-text-main) !important;
+}
+.rec-mm-feat-company {
+    color: var(--clr-text-muted) !important;
+}
+.rec-mm-feat-salary {
+    color: var(--clr-text-main) !important;
+}
+.rec-mm-feat-apply {
+    color: var(--clr-accent) !important;
+}
+.rec-mm-feat-apply:hover {
+    color: var(--clr-text-main) !important;
+}
+
+/* Homepage Hero Section */
+.rec-hero-title {
+    color: var(--clr-text-main) !important;
+}
+.rec-hero-title span {
+    background: linear-gradient(135deg, var(--clr-accent) 0%, var(--clr-primary) 50%, var(--clr-secondary) 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+.rec-hero-badge {
+    background: rgba(99, 102, 241, 0.1) !important;
+    border: 1px solid rgba(99, 102, 241, 0.2) !important;
+    color: var(--clr-accent) !important;
+}
+.rec-vitem-status {
+    background: rgba(20, 184, 166, 0.1) !important;
+    color: var(--clr-accent) !important;
+}
+.rec-sub-title {
+    color: var(--clr-accent) !important;
+    background: rgba(20, 184, 166, 0.08) !important;
+}
+
+/* Homepage IT Job Cards Overrides */
+.rec-job-card {
+    border: 1px solid var(--glass-border) !important;
+    background: var(--clr-bg-card) !important;
+}
+.rec-job-card:hover {
+    border-color: rgba(20, 184, 166, 0.4) !important;
+}
+.rec-job-card h3 {
+    color: var(--clr-text-main) !important;
+}
+.rec-job-card h3:hover {
+    color: var(--clr-accent) !important;
+}
+.rec-job-card-company {
+    color: var(--clr-text-muted) !important;
+}
+.rec-job-card-company i {
+    color: var(--clr-primary) !important;
+}
+.rec-job-card-badge {
+    background: rgba(20, 184, 166, 0.1) !important;
+    color: var(--clr-accent) !important;
+}
+.rec-job-card-tag {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--glass-border) !important;
+    color: var(--clr-text-dim) !important;
+}
+.rec-job-card-salary {
+    color: var(--clr-text-main) !important;
+}
+.rec-job-card-apply {
+    color: var(--clr-accent) !important;
+}
+.rec-job-card-apply:hover {
+    color: var(--clr-text-main) !important;
+}
+
+/* Footer & Social Icons Overrides */
+.rec-footer-title {
+    color: var(--clr-text-main) !important;
+}
+.rec-footer-title::after {
+    background: var(--clr-accent) !important;
+}
+.rec-footer-link a {
+    color: var(--clr-text-muted) !important;
+}
+.rec-footer-link a:hover {
+    color: var(--clr-accent) !important;
+}
+.rec-footer-social-link {
+    color: var(--clr-text-muted) !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--glass-border) !important;
+}
+.rec-footer-social-link:hover {
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary)) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4) !important;
+}
+.rec-newsletter-btn {
+    background: linear-gradient(135deg, var(--clr-accent), hsl(172, 90%, 35%)) !important;
+    color: #0b0f19 !important;
+    box-shadow: 0 4px 15px var(--clr-accent-glow) !important;
+}
+.rec-newsletter-btn:hover {
+    background: linear-gradient(135deg, hsl(172, 90%, 55%), var(--clr-accent)) !important;
+    box-shadow: 0 6px 20px var(--clr-accent-glow) !important;
+}
+
+/* Override any default Elementor global orange widgets or typography */
+.elementor-widget-heading .elementor-heading-title a {
+    color: inherit;
+}
+.elementor-widget-heading .elementor-heading-title a:hover {
+    color: var(--clr-accent) !important;
+}
+
+/* Force unified primary button colors globally (Indigo-Violet Tech Gradient) */
+.rec-btn-primary {
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary)) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35) !important;
+}
+.rec-btn-primary:hover {
+    background: linear-gradient(135deg, var(--clr-secondary), var(--clr-primary)) !important;
+    color: #fff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 25px rgba(99, 102, 241, 0.5) !important;
+}
+.rec-btn-primary i {
+    color: #fff !important;
+}
+
+/* ==========================================================================
+   ELEMENTOR PURE NATIVE WIDGET OVERRIDES (METHOD B)
+   ========================================================================== */
+
+/* 1. Logo & Badge Native Centering and Styling */
+.rec-job-card-logo .rec-logo-letter,
+.rec-comp-card-logo .rec-logo-letter {
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+}
+.rec-job-card-logo .elementor-widget-heading,
+.rec-comp-card-logo .elementor-widget-heading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Fix for stretched logo containers in Elementor (Screenshots 9 & 10) */
+.rec-job-card-logo {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    flex: 0 0 42px !important;
+    padding: 0 !important;
+}
+.rec-comp-card-logo {
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    min-height: 50px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    flex: 0 0 50px !important;
+    padding: 0 !important;
+    margin: 0 auto 12px !important;
+}
+
+/* 2. Hero Badge Native Elementor Alignment */
+.rec-hero-badge-icon {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.rec-hero-badge-icon .elementor-icon {
+    color: var(--clr-primary) !important;
+    font-size: 13px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.rec-hero-badge-text .elementor-heading-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: var(--clr-primary) !important;
+    margin: 0 !important;
+}
+
+/* 3. Candidates Visual List (Hero Card - Screenshot 7) */
+.rec-vitem {
+    align-items: center !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+}
+.rec-vitem-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: auto !important;
+    flex: 1 1 auto !important;
+}
+.rec-vitem-left .elementor-widget-icon {
+    width: auto !important;
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+.rec-vitem-left .elementor-widget-icon .elementor-icon {
+    font-size: 20px !important;
+    color: var(--clr-accent) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.rec-vitem-left .rec-vitem-details {
+    width: auto !important;
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+.rec-vitem-title .elementor-heading-title {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: var(--clr-text-main) !important;
+    margin: 0 !important;
+}
+.rec-vitem-sub .elementor-heading-title {
+    font-size: 12px !important;
+    color: var(--clr-text-dim) !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+}
+.rec-vitem-status {
+    padding: 0 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+}
+.rec-vitem-status .elementor-heading-title {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: var(--clr-primary) !important;
+    background: rgba(99, 102, 241, 0.1) !important;
+    padding: 4px 8px !important;
+    border-radius: 12px !important;
+    margin: 0 !important;
+    white-space: nowrap !important; /* Prevent text wrapping (Screenshot 7) */
+    display: inline-block !important;
+}
+
+/* 4. Tech Categories Native Styles & Hovers */
+.rec-cat-card-icon-box {
+    margin-bottom: 0px !important;
+}
+.rec-cat-card-icon .elementor-icon {
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 10px !important;
+    background: rgba(99, 102, 241, 0.1) !important;
+    color: var(--clr-primary) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transition: var(--transition-smooth) !important;
+}
+.rec-cat-card:hover .rec-cat-card-icon .elementor-icon {
+    background: var(--clr-primary) !important;
+    color: #fff !important;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4) !important;
+    transform: scale(1.05) !important;
+}
+.rec-cat-card-title .elementor-heading-title {
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    color: var(--clr-text-main) !important;
+    margin: 0 !important;
+    transition: var(--transition-smooth) !important;
+}
+.rec-cat-card:hover .rec-cat-card-title .elementor-heading-title {
+    color: var(--clr-accent) !important;
+}
+.rec-cat-card-count p {
+    font-size: 13px !important;
+    color: var(--clr-text-dim) !important;
+    margin: 0 !important;
+}
+
+/* 5. Hot Jobs Card Native Components */
+.rec-job-card-top-wrapper {
+    width: 100%;
+}
+.rec-job-title-link .elementor-heading-title {
+    font-size: 19px !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    color: var(--clr-text-main) !important;
+    margin: 0 0 6px !important;
+    transition: var(--transition-smooth) !important;
+}
+.rec-job-title-link:hover .elementor-heading-title {
+    color: var(--clr-accent) !important;
+}
+.rec-job-card-company {
+    align-items: center !important;
+}
+.rec-company-check-icon {
+    display: inline-flex !important;
+    margin: 0 !important;
+}
+.rec-company-check-icon .elementor-icon {
+    color: var(--clr-primary) !important;
+    font-size: 14px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.rec-company-name-text .elementor-heading-title {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--clr-text-muted) !important;
+    margin: 0 !important;
+}
+.rec-job-card-tag .elementor-heading-title {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: var(--clr-text-muted) !important;
+    margin: 0 !important;
+}
+.rec-job-card-badge {
+    white-space: nowrap !important; /* Prevent text wrapping (Screenshot 9) */
+    width: auto !important;
+    display: inline-block !important;
+}
+.rec-job-card-badge .elementor-heading-title {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: var(--clr-accent) !important;
+    margin: 0 !important;
+}
+.rec-job-card-salary {
+    padding: 0 !important;
+}
+.rec-job-card-salary .elementor-heading-title {
+    font-size: 19px !important;
+    font-weight: 700 !important;
+    color: var(--clr-accent) !important;
+    margin: 0 !important;
+}
+.rec-job-card-salary .elementor-heading-title span {
+    font-size: 12px !important;
+    color: var(--clr-text-dim) !important;
+    font-weight: 500 !important;
+    margin-left: 2px !important;
+}
+.rec-job-card-apply {
+    padding: 0 !important;
+    background: transparent !important;
+}
+.rec-job-card-apply .elementor-button {
+    background: transparent !important;
+    padding: 0 !important;
+    color: var(--clr-text-main) !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: var(--transition-smooth) !important;
+}
+.rec-job-card-apply:hover .elementor-button {
+    color: var(--clr-accent) !important;
+    background: transparent !important;
+}
+.rec-job-card-apply .elementor-button-icon {
+    margin: 0 !important;
+    order: 10;
+}
+
+/* 6. Featured Employers Card Native Components & Vertical Alignments (Screenshot 10) */
+.rec-comp-card {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+}
+.rec-comp-card-info h3 .elementor-heading-title {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: var(--clr-text-main) !important;
+    margin: 0 0 4px !important;
+}
+.rec-comp-card-info .elementor-widget-text-editor p {
+    font-size: 13px !important;
+    color: var(--clr-text-dim) !important;
+    margin: 0 !important;
+}
+.rec-comp-card-btn {
+    padding: 0 !important;
+    background: transparent !important;
+    margin-top: auto !important; /* Force all buttons to align at bottom of card (Screenshot 10) */
+    display: inline-block !important;
+}
+.rec-comp-card-btn .elementor-heading-title {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: var(--clr-primary) !important;
+    background: rgba(99, 102, 241, 0.1) !important;
+    padding: 6px 14px !important;
+    border-radius: 20px !important;
+    margin: 0 !important;
+    transition: var(--transition-smooth) !important;
+    display: inline-block !important;
+}
+.rec-comp-card:hover .rec-comp-card-btn .elementor-heading-title {
+    background: var(--clr-primary) !important;
+    color: #fff !important;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4) !important;
+}
+
+/* 7. Native Search Form Custom Spacing & Style Overrides (Screenshot 8) */
+.rec-main-search-card {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    align-items: center !important;
+}
+.rec-main-search-card .rec-search-col {
+    position: relative !important;
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
+.rec-main-search-card .rec-search-col-icon {
+    position: absolute !important;
+    left: 14px !important;
+    z-index: 10 !important;
+    margin: 0 !important;
+    pointer-events: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+.rec-main-search-card .rec-search-col-icon .elementor-icon {
+    color: var(--clr-text-dim) !important;
+    font-size: 14px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.rec-main-search-card .rec-search-input-wrapper,
+.rec-main-search-card .rec-search-select-wrapper {
+    width: 100% !important;
+    margin: 0 !important;
+    display: flex !important;
+}
+.rec-main-search-card .rec-search-col input,
+.rec-main-search-card .rec-search-col select {
+    width: 100% !important;
+    background: rgba(255,255,255,0.02) !important;
+    border: 1px solid rgba(255,255,255,0.05) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 12px 12px 12px 38px !important;
+    color: var(--clr-text-main) !important;
+    font-size: 14px !important;
+    outline: none !important;
+    transition: var(--transition-smooth) !important;
+    box-sizing: border-box !important;
+}
+.rec-main-search-card .rec-search-col select {
+    appearance: none !important;
+    cursor: pointer !important;
+}
+.rec-main-search-card .rec-search-col input:focus,
+.rec-main-search-card .rec-search-col select:focus {
+    border-color: var(--clr-accent) !important;
+    background: rgba(255,255,255,0.05) !important;
+}
+.rec-main-search-card .rec-search-submit {
+    margin: 0 !important;
+    padding: 0 !important;
+    flex: 0 0 auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+.rec-main-search-card .rec-search-submit .elementor-button {
+    padding: 12px 24px !important;
+    border-radius: var(--radius-sm) !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    height: 45px !important; /* Match search height */
+    box-sizing: border-box !important;
+}
+
+/* ==========================================================================
+   8. UNIVERSAL ANTI-ORANGE FOCUS & BORDER OUTLINES RESET
+   ========================================================================== */
+
+/* Remove any default browser orange outlines on focus */
+*:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+.elementor-button:focus,
+.rec-btn:focus,
+.rec-btn-primary:focus,
+.rec-newsletter-btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Clear default focus visible orange rings */
+*:focus-visible {
+    outline: none !important;
+}
+
+/* Override all button borders that might have default orange outlines or borders */
+button,
+input[type="submit"],
+.elementor-button,
+.rec-btn,
+.rec-btn-primary,
+.rec-newsletter-btn,
+.rec-job-card-apply,
+.rec-comp-card-btn,
+a.rec-btn,
+a.elementor-button {
+    border: none !important;
+    outline: none !important;
+}
+
+/* Global Premium Button Hover - Eliminate any orange hovers globally (Screenshot 8) */
+button:hover,
+input[type="submit"]:hover,
+.elementor-button:hover,
+.elementor-button:focus,
+.elementor-button:active,
+.rec-btn:hover,
+.rec-newsletter-btn:hover,
+a.rec-btn:hover,
+a.elementor-button:hover {
+    background: linear-gradient(135deg, var(--clr-secondary), var(--clr-primary)) !important;
+    color: #fff !important;
+    box-shadow: 0 6px 25px rgba(99, 102, 241, 0.45) !important;
+    transform: translateY(-2px) !important;
+    transition: var(--transition-smooth) !important;
+}
+
+/* ==========================================================================
+   9. COMPANY IMAGE LOGOS NATIVE OVERRIDES
+   ========================================================================== */
+
+/* Clean direct styles for Hot Jobs image logo widget and its children (Screenshot 7) */
+.rec-job-card-logo,
+.rec-job-card-logo .elementor-widget-container,
+.rec-job-card-logo .elementor-image,
+.rec-job-card-logo img {
+    width: 42px !important;
+    height: 42px !important;
+    max-width: 42px !important;
+    max-height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    border-radius: 50% !important;
+    background: transparent !important; /* Completely delete any background color! */
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    object-fit: contain !important;
+}
+
+/* Clean direct styles for Featured Employers image logo widget and its children (Screenshot 8) */
+.rec-comp-card-logo,
+.rec-comp-card-logo .elementor-widget-container,
+.rec-comp-card-logo .elementor-image,
+.rec-comp-card-logo img {
+    width: 60px !important;
+    height: 60px !important;
+    max-width: 60px !important;
+    max-height: 60px !important;
+    min-width: 60px !important;
+    min-height: 60px !important;
+    border-radius: 50% !important;
+    background: transparent !important; /* Completely delete any background color! */
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 auto 12px !important; /* Center horizontally in company card */
+    display: block !important;
+    object-fit: contain !important;
+}
+
+/* ==========================================================================
+   10. SEARCH BAR INPUT BORDER REMOVAL & BRIGHT TECH ICONS
+   ========================================================================== */
+
+/* Remove individual input border outline boxes from unified search bar (Screenshot 7) */
+.rec-main-search-card .rec-search-col input {
+    border: none !important;
+    background: transparent !important;
+    padding-left: 38px !important;
+    box-shadow: none !important;
+}
+.rec-main-search-card .rec-search-col input:focus {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Globally force default black icons to be bright, modern Neon Cyan and Indigo */
+.elementor-icon i,
+.elementor-widget-icon i,
+i.fa, i.fas, i.far, i.fab,
+[class^="fa-"], [class*=" fa-"], [class^="fa-"]::before, [class*=" fa-"]::before {
+    color: var(--clr-accent) !important; /* Premium Neon Cyan default */
+}
+.elementor-icon svg,
+.elementor-widget-icon svg,
+.rec-vitem-icon svg {
+    fill: var(--clr-accent) !important; /* Premium Neon Cyan default for SVG icons */
+    stroke: var(--clr-accent) !important;
+}
+
+/* Category card icons should default to primary indigo and white on hover */
+.rec-cat-card-icon .elementor-icon i,
+.rec-cat-card-icon i {
+    color: var(--clr-primary) !important;
+}
+.rec-cat-card-icon .elementor-icon svg,
+.rec-cat-card-icon svg {
+    fill: var(--clr-primary) !important;
+    stroke: var(--clr-primary) !important;
+}
+.rec-cat-card:hover .rec-cat-card-icon .elementor-icon i,
+.rec-cat-card:hover .rec-cat-card-icon i {
+    color: #fff !important;
+}
+.rec-cat-card:hover .rec-cat-card-icon .elementor-icon svg,
+.rec-cat-card:hover .rec-cat-card-icon svg {
+    fill: #fff !important;
+    stroke: #fff !important;
+}
+
+/* Verified checkmarks on company cards should be Tech Indigo */
+.rec-company-check-icon .elementor-icon i,
+.rec-company-check-icon i {
+    color: var(--clr-primary) !important;
+}
+.rec-company-check-icon .elementor-icon svg,
+.rec-company-check-icon svg {
+    fill: var(--clr-primary) !important;
+    stroke: var(--clr-primary) !important;
+}
+
+/* Job card apply arrow icons should be white and neon cyan on hover */
+.rec-job-card-apply .elementor-button-icon i {
+    color: var(--clr-text-main) !important;
+}
+.rec-job-card-apply .elementor-button-icon svg {
+    fill: var(--clr-text-main) !important;
+}
+.rec-job-card-apply:hover .elementor-button-icon i {
+    color: var(--clr-accent) !important;
+}
+.rec-job-card-apply:hover .elementor-button-icon svg {
+    fill: var(--clr-accent) !important;
+}
+
+/* Hero badge fire icon should be primary tech indigo */
+.rec-hero-badge-icon .elementor-icon i,
+.rec-hero-badge-icon i {
+    color: var(--clr-primary) !important;
+}
+.rec-hero-badge-icon .elementor-icon svg,
+.rec-hero-badge-icon svg {
+    fill: var(--clr-primary) !important;
+    stroke: var(--clr-primary) !important;
+}
+
+/* Search bar icons should be dim gray for subtle premium styling (Screenshot 7) */
+.rec-main-search-card .rec-search-col-icon .elementor-icon i,
+.rec-main-search-card .rec-search-col-icon i {
+    color: var(--clr-text-dim) !important;
+    font-size: 16px !important;
+}
+.rec-main-search-card .rec-search-col-icon .elementor-icon svg,
+.rec-main-search-card .rec-search-col-icon svg {
+    fill: var(--clr-text-dim) !important;
+    stroke: var(--clr-text-dim) !important;
+}
+
+/* Avatar icon in the visual card should also be Neon Cyan (Screenshot 7) */
+.rec-vcard-avatar .elementor-icon,
+.rec-vcard-avatar i,
+.rec-vcard-avatar svg {
+    color: var(--clr-accent) !important;
+    fill: var(--clr-accent) !important;
+    stroke: var(--clr-accent) !important;
+}
+
+
+
+/* ==========================================================================
+   HFE (Header Footer for Elementor) COMPATIBILITY
+   Maps HFE wrapper elements to existing theme styling
+   ========================================================================== */
+
+/* HFE wraps its header template in <header id="masthead"> */
+/* Make it behave exactly like .rec-header-wrapper */
+#masthead {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 9999 !important;
+    transition: var(--transition-smooth) !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+/* The .rec-header-container inside the HFE header section handles the visual layout */
+#masthead .rec-header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 24px !important; /* Premium ultra-compact padding */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative !important;
+}
+
+/* HFE wraps its footer template in <footer id="colophon"> */
+/* Ensure it gets the right dark background and styling */
+#colophon {
+    background-color: var(--clr-bg-dark) !important;
+    border-top: 1px solid var(--clr-border) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    margin-top: 100px !important;
+}
+
+/* Inside HFE footer, the .rec-footer-container handles layout */
+#colophon .rec-footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px 30px;
+}
+
+/* Remove default HFE masthead hidden title link */
+#masthead .main-title.bhf-hidden {
+    display: none !important;
+}
+
+/* Elementor section/column reset inside HFE header to preserve flex layout */
+#masthead .elementor-section,
+#masthead .elementor-container,
+#masthead .e-con {
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
+#masthead .elementor-column,
+#masthead .elementor-col-20,
+#masthead .elementor-col-60 {
+    padding: 0 !important;
+}
+
+/* Elementor section padding reset in HFE footer */
+#colophon .elementor-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Add scrolled glass effect to #masthead (same as .rec-header-wrapper.is-scrolled) */
+#masthead.hfe-is-scrolled {
+    padding: 0 !important;
+    background: var(--glass-bg) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
+}
+
+#masthead.hfe-is-scrolled .rec-header-container {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+
+/* Premium Unified Header Flexbox Layout */
+.rec-header-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+}
+
+/* Force absolute compact height on all header wrappers, sections, and containers
+   to immediately override any height, min-height, or paddings defined in the Elementor builder settings */
+#masthead,
+#masthead .rec-header-container,
+#masthead .elementor-container,
+#masthead .elementor-row,
+#masthead .elementor-column,
+#masthead .elementor-widget-wrap,
+#masthead .elementor-widget,
+.rec-header-wrapper,
+.rec-header-container {
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+/*/* TARGET SPECIFIC ACTIVE ELEMENTSKIT HEADER TEMPLATE (ID: 157) */
+body .ekit-template-content-header .elementor-157,
+body.elementor-editor-active .elementor-157,
+body.post-type-elementor_library .elementor-157,
+body .elementor-element-ead440fb,
+.elementor-element-ead440fb {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 55px !important;
+    max-height: 55px !important;
+    min-height: 0 !important;
+}
+
+/* ULTRA-HIGH SPECIFICITY SELECTOR TO FORCE LOGO ON FAR-LEFT AND MENU ON FAR-RIGHT */
+body .elementor-157 .elementor-element-f9daf1a9,
+html body .elementor-157 .elementor-element-f9daf1a9,
+body .elementor-element-f9daf1a9,
+.elementor-element-f9daf1a9 {
+    min-height: 0 !important;
+    height: 55px !important; /* Locks the header to a beautiful, ultra-slim horizontal bar! */
+    max-height: 55px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 40px !important; /* Premium generous horizontal padding to align with content */
+    padding-right: 40px !important;
+    position: relative !important; /* Critical: anchors the Megamenu */
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important; /* Pushes Logo to far-left, Menu to far-right */
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+@media (min-width: 1025px) {
+    /* Disable positioning and force visible overflow only on specific top-level header structure elements
+       to force the megamenu panel to center perfectly relative to the main full-width parent container f9daf1a9,
+       WITHOUT affecting any generic Elementor columns, rows, or widgets inside the megamenu panel! */
+    #masthead,
+    #masthead .rec-header-container,
+    .rec-header-wrapper,
+    .rec-header-container,
+    body .elementor-157 .elementor-element-ead440fb,
+    body .elementor-element-ead440fb,
+    .elementor-element-ead440fb,
+    body .elementor-157 .elementor-element-ead440fb > .elementor-widget-container,
+    body .elementor-element-ead440fb > .elementor-widget-container,
+    body .elementor-157 .elementor-element-ead440fb > .elementor-widget-container > .ekit-wid-con,
+    body .elementor-element-ead440fb > .elementor-widget-container > .ekit-wid-con,
+    body .elementor-157 .elementor-widget-ekit-nav-menu,
+    body .elementor-widget-ekit-nav-menu,
+    .elementor-widget-ekit-nav-menu,
+    body .elementor-157 .elementskit-menu-container,
+    body .elementskit-menu-container,
+    .elementskit-menu-container,
+    body .elementor-157 .elementskit-navbar-nav,
+    body .elementskit-navbar-nav,
+    .elementskit-navbar-nav,
+    body .elementor-157 .elementskit-navbar-nav > li.elementskit-megamenu-has,
+    body .elementskit-navbar-nav > li.elementskit-megamenu-has,
+    .elementskit-navbar-nav > li.elementskit-megamenu-has {
+        overflow: visible !important; /* Crucial: ensures absolute positioned panels and hover bridges are never clipped! */
+    }
+
+    body .elementor-157 .elementskit-menu-container,
+    body .elementskit-menu-container,
+    .elementskit-menu-container,
+    body .elementor-157 .elementskit-navbar-nav,
+    body .elementskit-navbar-nav,
+    .elementskit-navbar-nav,
+    body .elementor-157 .elementskit-navbar-nav > li.elementskit-megamenu-has,
+    body .elementskit-navbar-nav > li.elementskit-megamenu-has,
+    .elementskit-navbar-nav > li.elementskit-megamenu-has {
+        position: static !important;
+    }
+}
+
+/* Make Column 2 the relative positioning anchor for the Mega Menu panel,
+   allowing it to shift right alongside the navigation menu while preventing clipping */
+body .elementor-157 .elementor-element-c3b0b40e,
+body .elementor-element-c3b0b40e,
+.elementor-element-c3b0b40e {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* Force absolute highest stacking context for the header container */
+body .elementor-157 .elementor-element-f9daf1a9,
+html body .elementor-157 .elementor-element-f9daf1a9,
+body .elementor-element-f9daf1a9,
+.elementor-element-f9daf1a9 {
+    position: relative !important;
+    z-index: 999999 !important; /* Forces the entire header container to render above all page content! */
+}
+
+/* Force complete reset for all widgets inside the ElementsKit header to eliminate default Elementor gaps and center vertically */
+.elementor-element-f9daf1a9 .elementor-widget,
+.elementor-element-f9daf1a9 .elementor-widget-container,
+.elementor-element-f9daf1a9 .elementor-heading-title,
+.elementor-157 .elementor-widget,
+.elementor-157 .elementor-widget-container,
+.elementor-157 .elementor-heading-title,
+.rec-logo-widget,
+.rec-nav-menu-widget,
+.rec-btn-widget {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: 100% !important; /* Fills the 55px parent container */
+    display: flex !important;
+    align-items: center !important;
+    line-height: normal !important; /* Perfect typography baseline */
+}
+
+/* Style the logo text specifically for mathematical vertical baseline centering */
+.elementor-element-f9daf1a9 .elementor-heading-title a,
+.elementor-157 .elementor-heading-title a,
+.rec-logo-widget .elementor-heading-title a,
+.rec-logo-widget a {
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    color: var(--clr-text-main) !important;
+    text-decoration: none !important;
+    line-height: normal !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    transition: var(--transition-smooth) !important;
+}
+
+/* Maintain logo color on hover (prevent 'Tech' from changing color) */
+.elementor-element-f9daf1a9 .elementor-heading-title a:hover,
+.elementor-157 .elementor-heading-title a:hover,
+.rec-logo-widget a:hover {
+    color: var(--clr-text-main) !important; /* Keep 'Tech' white */
+    text-decoration: none !important;
+}
+.elementor-element-f9daf1a9 .elementor-heading-title a:hover span,
+.elementor-157 .elementor-heading-title a:hover span,
+.rec-logo-widget a:hover span {
+    color: #14b8a6 !important; /* Keep 'Recruit' green */
+}
+
+/* Align Columns/Containers vertically in the center and distribute horizontal space */
+.elementor-element-f9daf1a9 .elementor-element-1fb3d23f,
+.elementor-157 .elementor-element-1fb3d23f,
+.elementor-element-1fb3d23f,
+.rec-logo-widget {
+    flex: 0 0 auto !important; /* Logo container maintains its natural compact width */
+    width: auto !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.elementor-element-f9daf1a9 .elementor-element-c3b0b40e,
+.elementor-157 .elementor-element-c3b0b40e,
+.elementor-element-c3b0b40e {
+    flex: 1 1 auto !important; /* Menu container expands and aligns the navbar menu to the far right */
+    width: auto !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important; /* Perfectly balances the logo on the far left */
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.elementor-element-f9daf1a9 .elementor-widget-wrap,
+.elementor-157 .elementor-widget-wrap,
+.elementor-widget-wrap {
+    display: flex !important;
+    align-items: center !important;
+    align-self: center !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Decorative Premium Element to the right of the ElementsKit navigation menu */
+.elementor-element-f9daf1a9 .elementskit-navbar-nav::after,
+.elementor-157 .elementskit-navbar-nav::after,
+.rec-nav-menu-widget .elementskit-navbar-nav::after,
+.elementskit-navbar-nav::after {
+    content: '';
+    display: inline-flex;
+    align-items: center;
+    width: 1px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 0 24px 0 10px !important; /* Spacious gap after "Cẩm Nang Nghề" */
+}
+
+/* Append a glowing animated 'LIVE JOBS' green status pill to eliminate empty space */
+.elementor-element-f9daf1a9 .elementskit-menu-container,
+.elementor-157 .elementskit-menu-container,
+.rec-nav-menu-widget .elementskit-menu-container,
+.elementskit-menu-container {
+    display: flex !important;
+    align-items: center !important;
+}
+
+
+/* Make Elementor container behave as a unified flex container */
+#masthead .elementor-container,
+.rec-header-container > .elementor-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Prevent columns/elements from wrapping and center them vertically */
+.rec-header-container > .rec-logo,
+.rec-header-container > .rec-nav,
+.rec-header-container > .rec-actions,
+#masthead .elementor-column,
+.rec-header-container > .elementor-container > .elementor-column {
+    width: auto !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    align-self: center !important;
+}
+
+/* Middle element (Nav Menu) takes remaining space and centers its content */
+.rec-header-container > .rec-nav,
+#masthead .elementor-column:nth-child(2),
+.rec-header-container > .elementor-container > .elementor-column:nth-child(2) {
+    flex: 1 1 auto !important;
+    justify-content: center !important;
+}
+
+/* For Elementor's column inner widget wrapper */
+#masthead .elementor-widget-wrap,
+.rec-header-container .elementor-widget-wrap {
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+}
+
+/* 2. ElementsKit Navigation Menu Premium Typography, Layout & Aesthetics */
+.elementskit-menu-container {
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* DESKTOP-SPECIFIC PREMIUM SPACING & POSITIONING (Overriding Elementor default columns) */
+@media (min-width: 1025px) {
+    /* Align Column 2 to flow menu naturally starting right after the logo */
+    body .elementor-157 .elementor-element-c3b0b40e,
+    body .elementor-element-c3b0b40e,
+    .elementor-element-c3b0b40e,
+    #masthead .elementor-column:nth-child(2),
+    .rec-header-container > .elementor-container > .elementor-column:nth-child(2) {
+        flex: 1 1 auto !important;
+        justify-content: flex-end !important; /* Pushes the menu to the far right, away from the logo */
+        width: auto !important;
+        height: 55px !important;
+        overflow: visible !important;
+    }
+
+    /* Premium right-aligned menu widget layout, preventing it from sticking to the logo on the left */
+    body .elementor-157 .elementor-element.elementor-element-ead440fb,
+    body .elementor-element-ead440fb,
+    .elementor-element-ead440fb,
+    body .rec-nav-menu-widget,
+    .rec-nav-menu-widget {
+        margin-left: auto !important; /* Perfectly pushes the menu to the right inside the middle column */
+        margin-right: 0 !important; /* Flush right alignment */
+        width: auto !important;
+        flex-grow: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        overflow: visible !important;
+    }
+
+    /* Lock all menu heights to exactly 55px (same as header height) to eliminate any hover-breaking offsets or mismatches! */
+    body .elementor-157 .elementskit-menu-container,
+    body .elementor-157 .elementskit-navbar-nav,
+    body .elementor-157 .elementskit-menu-container .elementskit-navbar-nav > li,
+    body .elementskit-menu-container,
+    body .elementskit-navbar-nav,
+    body .elementskit-menu-container .elementskit-navbar-nav > li,
+    .elementskit-menu-container,
+    .elementskit-navbar-nav,
+    .elementskit-menu-container .elementskit-navbar-nav > li {
+        height: 55px !important;
+        max-height: 55px !important;
+        min-height: 55px !important;
+        overflow: visible !important;
+    }
+
+    /* Force nav list to flow horizontally and space items uniformly */
+    body .elementor-157 .elementskit-navbar-nav,
+    body .elementskit-navbar-nav,
+    .elementskit-navbar-nav {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: flex-end !important; /* Right-aligned inside menu widget to move away from Logo */
+        margin-left: auto !important; /* Pushes the menu items to the right side of the header */
+        align-items: center !important;
+        width: auto !important;
+        gap: 24px !important; /* Elegant spacing gap between menu items */
+        list-style: none !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        margin-right: 0 !important;
+        padding: 0 !important;
+    }
+
+    body .elementor-157 .elementskit-menu-container .elementskit-navbar-nav > li,
+    body .elementskit-menu-container .elementskit-navbar-nav > li,
+    .elementskit-menu-container .elementskit-navbar-nav > li {
+        float: none !important;
+        display: inline-block !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: relative !important;
+        flex: 0 0 auto !important;
+        width: auto !important;
+    }
+
+    body .elementor-157 .elementskit-menu-container .elementskit-navbar-nav > li.elementskit-megamenu-has,
+    body .elementskit-menu-container .elementskit-navbar-nav > li.elementskit-megamenu-has,
+    .elementskit-menu-container .elementskit-navbar-nav > li.elementskit-megamenu-has {
+        position: static !important; /* Un-anchor so megamenu centers relative to the main container */
+    }
+}
+
+/* Global ElementsKit menu link adjustments */
+.elementskit-menu-container .elementskit-navbar-nav > li > a {
+    white-space: nowrap !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    color: var(--clr-text-muted) !important;
+    padding: 0 4px !important; /* Compact padding since flex-gap handles spacing */
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: var(--transition-smooth) !important;
+    height: 55px !important; /* Lock vertical alignment to exact 55px bar height */
+    line-height: 55px !important;
+}
+
+.elementskit-menu-container .elementskit-navbar-nav > li:hover > a.ekit-menu-nav-link,
+.elementskit-menu-container .elementskit-navbar-nav > li:hover > a {
+    color: var(--clr-text-main) !important;
+}
+
+/* 3. ElementsKit Megamenu Panel Centering & Zero-Gap Hover Safety (Preserving User's Original Elementor Styling) */
+@media (min-width: 1025px) {
+    body .elementskit-navbar-nav .elementskit-megamenu-panel {
+        /* Centering overrides - Centers relative to the full-width header container */
+        left: 50% !important;
+        transform: translateX(-50%) !important; 
+        
+        /* 
+           Zero-Gap Hover Safety Overlap Technique:
+           To make the hover bridge 100% foolproof in all browsers and sub-pixel contexts, 
+           we set the panel to overlap the header by exactly 6px (top: calc(100% - 6px)).
+           Then, we use an 18px transparent top border. Since 18px - 6px = 12px, this retains a perfect 12px 
+           visual gap for users, while creating a rock-solid 6px deep physical overlap that prevents hover loss!
+           background-clip: padding-box ensures the custom background color set in Elementor is not painted 
+           on the 18px transparent top border!
+        */
+        top: 100% !important; /* Forces the panel to sit perfectly flush (dÃ­nh) with the bottom of the header */
+        margin-top: 0 !important;
+        border-top: 0 !important; /* Remove any visual gaps or offsets */
+        
+        z-index: 999999 !important; /* Render above all elements on the page */
+    }
+
+    /* Force all Elementor containers and widgets inside ElementsKit Mega Menu to align at the top */
+    body .elementskit-navbar-nav .elementskit-megamenu-panel .e-con,
+    body .elementskit-navbar-nav .elementskit-megamenu-panel .e-con-inner,
+    body .elementskit-navbar-nav .elementskit-megamenu-panel .elementor-container,
+    body .elementskit-navbar-nav .elementskit-megamenu-panel .elementor-widget-wrap {
+        align-items: flex-start !important;
+    }
+
+    body .elementskit-navbar-nav .elementskit-megamenu-panel .e-con.e-child,
+    body .elementskit-navbar-nav .elementskit-megamenu-panel .e-con-inner > .e-con,
+    body .elementskit-navbar-nav .elementskit-megamenu-panel .elementor-column {
+        align-self: flex-start !important;
+    }
+
+    /* Disable any old absolute hover bridges to prevent layout side effects */
+    body .elementskit-navbar-nav .elementskit-megamenu-panel::before {
+        display: none !important;
+    }
+
+    /* Keep Megamenu Panel visible during smooth hover state transition debounces */
+    body .elementskit-navbar-nav > li.elementskit-megamenu-has:hover .elementskit-megamenu-panel,
+    body .elementskit-navbar-nav > li.elementskit-megamenu-has.ekit-hovered .elementskit-megamenu-panel {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+}
+
+/* 4. Other layout optimizations */
+.rec-nav-list {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 28px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.rec-nav-link {
+    font-size: 14px !important;
+    padding: 6px 0 !important;
+}
+
+.rec-search-input {
+    padding: 6px 14px 6px 32px !important;
+    font-size: 13px !important;
+}
+.rec-search-icon {
+    left: 12px !important;
+}
+
+.rec-btn {
+    padding: 8px 18px !important;
+    font-size: 13px !important;
+}
+
+.rec-header-container .elementor-button {
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    height: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: center !important;
+    margin: 0 !important;
+}
+
+.rec-header-wrapper .e-con-inner,
+.rec-header-wrapper .e-con {
+    flex-wrap: nowrap !important;
+}
+
+/* ==========================================================================
+   WORDPRESS ADMIN BAR COMPATIBILITY
+   ========================================================================== */
+/* Ensure the WordPress Admin Bar itself renders on the absolute highest stack layer */
+#wpadminbar {
+    z-index: 9999999 !important; /* Forces the black admin bar to stay on top of the sticky header */
+}
+
+/* Push any fixed/sticky header containers down so they do not cover the WordPress admin bar */
+body.admin-bar #masthead,
+  body.admin-bar .rec-header-wrapper,
+  body.admin-bar [data-elementor-type="header"],
+  body.admin-bar .elementskit-sticky-default {
+    top: 32px !important; /* Pushes fixed headers down 32px on desktop */
+}
+
+@media screen and (max-width: 782px) {
+    body.admin-bar #masthead,
+  body.admin-bar .rec-header-wrapper,
+  body.admin-bar [data-elementor-type="header"],
+  body.admin-bar .elementskit-sticky-default {
+        top: 46px !important; /* Pushes fixed headers down 46px on mobile */
+    }
+}
+
+/* ==========================================================================
+   AESTHETIC ADDITIONS - PREMIUM LIVE DETAILS & GLOWS
+   ========================================================================== */
+
+
+/* Subtle premium glowing accent line at the bottom of the sticky header when scrolled */
+#masthead.hfe-is-scrolled::after,
+.rec-header-wrapper.is-scrolled::after {
+    content: "" !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 1px !important;
+    background: linear-gradient(90deg, transparent 0%, #14b8a6 30%, #6366f1 70%, transparent 100%) !important;
+    opacity: 0.8 !important;
+    box-shadow: 0 1px 6px rgba(20, 184, 166, 0.3) !important;
+    pointer-events: none !important;
+}
+
+/* Maintain logo green glow on hover */
+.elementor-element-f9daf1a9 .elementor-heading-title a span,
+.elementor-157 .elementor-heading-title a span,
+.rec-logo-widget a span,
+.rec-logo-widget .elementor-heading-title a span {
+    transition: all 0.3s ease !important;
+}
+.elementor-element-f9daf1a9 .elementor-heading-title a:hover span,
+.elementor-157 .elementor-heading-title a:hover span,
+.rec-logo-widget a:hover span,
+.rec-logo-widget .elementor-heading-title a:hover span {
+    color: #14b8a6 !important;
+    text-shadow: 0 0 10px rgba(20, 184, 166, 0.6) !important;
+}
+
+/* ==========================================================================
+   FLAWLESS HEADER Z-INDEX & OVERFLOW FIX (Megamenu visible on top of page)
+   ========================================================================== */
+.hfe-header,
+.site-header,
+#masthead,
+header,
+.rec-header-wrapper,
+div[data-elementor-type="header"],
+.elementor-165,
+.elementor-165 .elementor-section,
+.elementor-165 .elementor-container,
+.elementor-165 .elementor-column,
+.elementor-165 .elementor-widget-wrap,
+.elementor-166,
+.elementor-166 .elementor-section,
+.elementor-166 .elementor-container,
+.elementor-166 .elementor-column {
+    overflow: visible !important;
+    z-index: 999999 !important;
+}
+
+/* Force body content elements to remain stacked below the sticky header at all scroll positions */
+.site-content,
+.site-content > *,
+.elementor-page-73 .elementor-section,
+.elementor-page-73 .elementor-container,
+.page-id-73 .elementor-section {
+    z-index: 1 !important;
+}
+
+
+
+/* ==========================================================================
+   ELEMENTSKIT STATIC PREMIUM HEADER STYLING (NON-FIXED / BOXED)
+   ========================================================================== */
+.ekit-template-content-header {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 999999 !important; /* Premium stacking context to stay on top of body content */
+    background: var(--glass-bg) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow) !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Revert scroll-linked glowing borders for non-sticky header */
+.ekit-template-content-header.is-scrolled {
+    background: var(--glass-bg) !important;
+}
+
+/* Prevents push-down shift for static relative header and its inner elements under admin bar */
+body.admin-bar .ekit-template-content-header,
+body.admin-bar .ekit-template-content-header .elementor-157,
+body.admin-bar .ekit-template-content-header .elementor-element-f9daf1a9,
+body.admin-bar .elementor-element-ead440fb,
+body.admin-bar .elementor-element-f9daf1a9 {
+    top: 0 !important; 
+    margin-top: 0 !important;
+}
+
+@media screen and (max-width: 782px) {
+    body.admin-bar .ekit-template-content-header,
+    body.admin-bar .ekit-template-content-header .elementor-157,
+    body.admin-bar .ekit-template-content-header .elementor-element-f9daf1a9,
+    body.admin-bar .elementor-element-ead440fb,
+    body.admin-bar .elementor-element-f9daf1a9 {
+        top: 0 !important;
+        margin-top: 0 !important;
+    }
+}
+
+/* Center and box the inner header elements to perfectly align with content margins and prevent edge overflow */
+body .elementor-157 .elementor-element-f9daf1a9,
+html body .elementor-157 .elementor-element-f9daf1a9,
+body .elementor-element-f9daf1a9,
+.elementor-element-f9daf1a9 {
+    min-height: 0 !important;
+    height: 55px !important; /* Locks the header to a beautiful, ultra-slim horizontal bar! */
+    max-height: 55px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 20px !important; /* Premium generous horizontal padding to align with content */
+    padding-right: 20px !important;
+    position: relative !important; /* Critical: anchors the Megamenu */
+    display: flex !important;
+    flex-direction: row !important;
+    z-index: 999999 !important; /* Forces the entire header container to render above all page content! */
+    max-width: 1200px !important; /* Boxed alignment with homepage grid content */
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   NATIVE ELEMENTOR HEADER COMPONENT FLEX LAYOUT STYLING
+   ========================================================================== */
+body .elementor-157 .elementor-element-f9daf1a9 .elementor-widget-wrap,
+body .elementor-element-f9daf1a9 .elementor-widget-wrap,
+.elementor-element-f9daf1a9 .elementor-widget-wrap,
+body .elementor-element-f9daf1a9 > .elementor-widget-wrap,
+.elementor-element-f9daf1a9 > .elementor-widget-wrap {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important; /* Distributes Logo, Menu, and Button */
+    height: 55px !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* 1. Native Logo Widget Alignment */
+body .elementor-157 .rec-logo-widget,
+body .rec-logo-widget,
+.rec-logo-widget {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* 2. Native ElementsKit Menu Alignment */
+body .elementor-157 .rec-nav-menu-widget,
+body .rec-nav-menu-widget,
+.rec-nav-menu-widget {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    margin: 0 30px !important; /* Premium spacing gap between menu and button */
+    padding: 0 !important;
+    overflow: visible !important;
+}
+
+/* 3. Native Button Widget Alignment */
+body .elementor-157 .rec-btn-widget,
+body .rec-btn-widget,
+.rec-btn-widget {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* ==========================================================================
+   FORCE COMPLETE HEIGHT & VERTICAL PADDING RESET ON ALL HEADER WRAPPER LEVELS
+   This resolves the "different colored space above menu" and "hanging menu" bug
+   ========================================================================== */
+.ekit-template-content-header,
+body .ekit-template-content-header .elementor-157,
+body .elementor-157 .elementor-section,
+body .elementor-157 .elementor-container,
+body .elementor-157 .elementor-column,
+body .elementor-157 .elementor-widget-wrap,
+/* Add direct unique element ID classes so they apply in Elementor Editor canvas too */
+body.elementor-editor-active .elementor-element-ead440fb,
+body.elementor-editor-active .elementor-element-ead440fb > .elementor-container,
+body.elementor-editor-active .elementor-element-f9daf1a9,
+body.elementor-editor-active .elementor-element-f9daf1a9 > .elementor-widget-wrap,
+body .elementor-element-ead440fb,
+body .elementor-element-ead440fb > .elementor-container,
+body .elementor-element-f9daf1a9,
+body .elementor-element-f9daf1a9 > .elementor-widget-wrap,
+.elementor-element-ead440fb,
+.elementor-element-ead440fb > .elementor-container,
+.elementor-element-f9daf1a9,
+.elementor-element-f9daf1a9 > .elementor-widget-wrap {
+    height: 55px !important;
+    max-height: 55px !important;
+    min-height: 55px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* ==========================================================================
+   GROUP 3: PREMIUM MOBILE-FIRST RESPONSIVE DEMO STYLING
+   ========================================================================== */
+
+/* 1. Responsive Grid System (Before / After demonstration) */
+.rec-responsive-demo-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 20px !important;
+    margin: 30px 0 !important;
+    width: 100% !important;
+}
+
+.rec-demo-card {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 24px !important;
+    border-radius: 12px !important;
+    flex: 1 1 33.33% !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.rec-demo-card:hover {
+    background: rgba(20, 184, 166, 0.05) !important;
+    border-color: rgba(20, 184, 166, 0.3) !important;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.rec-demo-card-icon {
+    font-size: 24px !important;
+    color: #14b8a6 !important;
+    margin-bottom: 15px !important;
+}
+
+.rec-demo-card-title {
+    color: #ffffff !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    margin: 0 0 10px 0 !important;
+}
+
+.rec-demo-card-desc {
+    color: #94a3b8 !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+}
+
+/* 2. Touch Target Compliant Buttons (Apple / Google Guidelines) */
+.rec-optimized-btn-wrap {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 16px !important;
+    align-items: center !important;
+    margin-top: 30px !important;
+}
+
+.rec-mobile-optimized-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 48px !important; /* Locks height to exact 48px tap target size */
+    min-height: 48px !important;
+    min-width: 150px !important;
+    padding: 0 24px !important;
+    border-radius: 8px !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+    box-sizing: border-box !important;
+}
+
+.rec-mobile-optimized-btn.btn-primary {
+    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3) !important;
+}
+
+.rec-mobile-optimized-btn.btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 18px rgba(20, 184, 166, 0.5) !important;
+}
+
+.rec-mobile-optimized-btn.btn-secondary {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.rec-mobile-optimized-btn.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* 3. Mobile Device Adaptability (Mobile-First responsive stacking and typography scale) */
+@media (max-width: 767px) {
+    .rec-mobile-optimized-section {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    
+    .rec-responsive-demo-grid {
+        flex-direction: column !important; /* Stack columns vertically on mobile */
+        gap: 16px !important;
+    }
+    
+    .rec-demo-card {
+        flex: 1 1 100% !important; /* Columns expand to full width */
+        padding: 20px !important;
+    }
+    
+    .rec-optimized-btn-wrap {
+        flex-direction: column !important; /* Stack buttons vertically on mobile for thumb reach */
+        align-items: stretch !important;
+        width: 100% !important;
+        gap: 12px !important;
+    }
+    
+    .rec-mobile-optimized-btn {
+        width: 100% !important;
+        height: 50px !important; /* Slightly taller on mobile for maximum thumb tap accuracy */
+    }
+}
+
+/* ==========================================================================
+   MOBILE MEGAMENU DISPLAY OPTIMIZATION (Collapse by default)
+   This ensures the megamenu panel is hidden on mobile until clicked/expanded
+   ========================================================================== */
+@media (max-width: 1024px) {
+    /* Hide the ElementsKit megamenu panel on mobile/tablet by default */
+    body .elementor-157 .elementskit-menu-container .elementskit-megamenu-panel,
+    body .elementor-157 .elementskit-menu-container .elementskit-submenu-panel,
+    body .elementskit-menu-container .elementskit-megamenu-panel,
+    body .elementskit-menu-container .elementskit-submenu-panel,
+    .elementskit-menu-container .elementskit-megamenu-panel,
+    .elementskit-menu-container .elementskit-submenu-panel {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        position: relative !important;
+        top: 0 !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Display the megamenu panel ONLY when the parent list item is expanded/clicked */
+    body .elementor-157 .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-megamenu-panel,
+    body .elementor-157 .elementskit-menu-container li.ekit-dropdown-open > .elementskit-megamenu-panel,
+    body .elementor-157 .elementskit-menu-container li.active > .elementskit-megamenu-panel,
+    body .elementor-157 .elementskit-menu-container li.is-open > .elementskit-megamenu-panel,
+    body .elementor-157 .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-submenu-panel,
+    body .elementor-157 .elementskit-menu-container li.ekit-dropdown-open > .elementskit-submenu-panel,
+    body .elementor-157 .elementskit-menu-container li.active > .elementskit-submenu-panel,
+    body .elementor-157 .elementskit-menu-container li.is-open > .elementskit-submenu-panel,
+    body .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-megamenu-panel,
+    body .elementskit-menu-container li.ekit-dropdown-open > .elementskit-megamenu-panel,
+    body .elementskit-menu-container li.active > .elementskit-megamenu-panel,
+    body .elementskit-menu-container li.is-open > .elementskit-megamenu-panel,
+    body .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-submenu-panel,
+    body .elementskit-menu-container li.ekit-dropdown-open > .elementskit-submenu-panel,
+    body .elementskit-menu-container li.active > .elementskit-submenu-panel,
+    body .elementskit-menu-container li.is-open > .elementskit-submenu-panel,
+    .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-megamenu-panel,
+    .elementskit-menu-container li.ekit-dropdown-open > .elementskit-megamenu-panel,
+    .elementskit-menu-container li.active > .elementskit-megamenu-panel,
+    .elementskit-menu-container li.is-open > .elementskit-megamenu-panel,
+    .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-submenu-panel,
+    .elementskit-menu-container li.ekit-dropdown-open > .elementskit-submenu-panel,
+    .elementskit-menu-container li.active > .elementskit-submenu-panel,
+    .elementskit-menu-container li.is-open > .elementskit-submenu-panel {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+        overflow: visible !important;
+        padding: 15px !important;
+        margin-top: 10px !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-radius: 8px !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+}
+
+/* ==========================================================================
+   ELEMENTSKIT MOBILE NAV DRAWER & HAMBURGER PREMIUM OVERRIDES (max-width: 1024px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    /* 1. Reset Desktop Flex Height Locks on Mobile to Prevent Layout Squishing */
+    body .elementor-157 .elementor-element-f9daf1a9,
+    body .elementor-element-f9daf1a9,
+    .elementor-element-f9daf1a9 {
+        height: 55px !important;
+        max-height: 55px !important;
+        min-height: 55px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0 15px !important;
+    }
+
+    body .elementor-157 .elementor-element-f9daf1a9 .elementor-widget-wrap,
+    body .elementor-element-f9daf1a9 .elementor-widget-wrap,
+    .elementor-element-f9daf1a9 .elementor-widget-wrap {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        height: 55px !important;
+    }
+
+    /* Pushes menu widget and hamburger to the far right on mobile */
+    body .elementor-157 .rec-nav-menu-widget,
+    body .rec-nav-menu-widget,
+    .rec-nav-menu-widget {
+        margin: 0 0 0 auto !important;
+        flex: 0 0 auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+    }
+
+    /* 2. Style Hamburger Toggle Button Elegantly */
+    body .elementskit-menu-toggler,
+    .elementskit-menu-toggler,
+    body .elementskit-menu-hamburger,
+    .elementskit-menu-hamburger,
+    body .ekit-template-lookup-icon {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 8px !important;
+        background: rgba(20, 184, 166, 0.15) !important; /* Premium semi-transparent Neon Cyan */
+        border: 1px solid var(--clr-accent) !important; /* Glowing accent border */
+        color: var(--clr-accent) !important;
+        cursor: pointer !important;
+        transition: var(--transition-smooth) !important;
+        z-index: 99999 !important;
+        padding: 0 !important;
+        position: fixed !important; /* Lock to viewport so it remains on the header bar */
+        top: 6px !important;
+        right: 15px !important;
+        box-shadow: 0 0 12px rgba(20, 184, 166, 0.4) !important; /* Premium glow effect */
+    }
+
+    body .elementskit-menu-toggler:hover,
+    .elementskit-menu-toggler:hover {
+        background: var(--clr-accent) !important; /* Solid cyan on hover */
+        border-color: var(--clr-accent) !important;
+        color: #0b0f19 !important;
+        box-shadow: 0 0 20px rgba(20, 184, 166, 0.7) !important;
+    }
+
+    body .elementskit-menu-toggler:hover span,
+    .elementskit-menu-toggler:hover span,
+    body .elementskit-menu-toggler:hover span::before,
+    .elementskit-menu-toggler:hover span::before,
+    body .elementskit-menu-toggler:hover span::after,
+    .elementskit-menu-toggler:hover span::after {
+        background-color: #0b0f19 !important; /* Flip bars to dark midnight blue on hover */
+    }
+
+    /* Hide the sibling hamburger button outside when the menu is active to prevent any peaking */
+    body .elementskit-menu-container.active ~ .elementskit-menu-toggler,
+    body .elementskit-menu-container.active ~ .elementskit-menu-hamburger,
+    body .elementskit-menu-container.show ~ .elementskit-menu-toggler,
+    body .elementskit-menu-container.show ~ .elementskit-menu-hamburger {
+        display: none !important;
+    }
+
+    /* Style inner hamburger icon to draw 3 perfect lines */
+    body .elementskit-menu-toggler span,
+    .elementskit-menu-toggler span,
+    body .elementskit-menu-hamburger span,
+    .elementskit-menu-hamburger span {
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        display: inline-block !important;
+        width: 20px !important;
+        height: 2px !important;
+        background-color: #ffffff !important;
+        border-radius: 2px !important;
+        margin: 0 !important; /* Reset any margins */
+    }
+
+    body .elementskit-menu-toggler span::before,
+    .elementskit-menu-toggler span::before,
+    body .elementskit-menu-toggler span::after,
+    .elementskit-menu-toggler span::after,
+    body .elementskit-menu-hamburger span::before,
+    .elementskit-menu-hamburger span::before,
+    body .elementskit-menu-hamburger span::after,
+    .elementskit-menu-hamburger span::after {
+        content: '' !important;
+        position: absolute !important;
+        width: 20px !important;
+        height: 2px !important;
+        background-color: #ffffff !important;
+        left: 0 !important;
+        border-radius: 2px !important;
+        transition: var(--transition-smooth) !important;
+    }
+
+    body .elementskit-menu-toggler span::before,
+    .elementskit-menu-toggler span::before,
+    body .elementskit-menu-hamburger span::before,
+    .elementskit-menu-hamburger span::before {
+        top: -6px !important;
+    }
+
+    body .elementskit-menu-toggler span::after,
+    .elementskit-menu-toggler span::after,
+    body .elementskit-menu-hamburger span::after,
+    .elementskit-menu-hamburger span::after {
+        top: 6px !important;
+    }
+
+    /* 3. Transform Mobile Menu Container into a Gorgeous Slide-Out Off-Canvas Drawer */
+    body .elementor-157 .elementskit-menu-container,
+    body .elementskit-menu-container,
+    .elementskit-menu-container {
+        position: fixed !important;
+        top: 0 !important;
+        right: -300px !important; /* Fully hidden off-screen to the right by default */
+        left: auto !important;
+        width: 300px !important;
+        height: 100vh !important;
+        background: rgba(10, 14, 26, 0.98) !important; /* Premium Midnight Dark Glass */
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6) !important;
+        padding: 80px 24px 40px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+        z-index: 999999 !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important; /* Bulletproof fix: clip all horizontal overflows */
+        box-sizing: border-box !important;
+        transform: none !important; /* Prevent ElementsKit inline transforms from shifting it closed */
+        
+        /* Bulletproof fix for peeking letters: Hide completely when drawer is closed */
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    /* Slide-in State when elementskit adds .active */
+    body .elementor-157 .elementskit-menu-container.active,
+    body .elementor-157 .elementskit-menu-container.show,
+    body .elementskit-menu-container.active,
+    body .elementskit-menu-container.show,
+    .elementskit-menu-container.active,
+    .elementskit-menu-container.show {
+        right: 0 !important; /* Slide smoothly into view */
+        left: auto !important;
+        transform: none !important; /* Prevent ElementsKit inline transforms from shifting it out of frame! */
+        
+        /* Show and make interactable when drawer is open */
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    /* 4. Style Mobile Close Button */
+    body .elementskit-menu-close,
+    .elementskit-menu-close,
+    body .elementskit-menu-close-btn,
+    .elementskit-menu-close-btn {
+        position: absolute !important;
+        top: 20px !important;
+        right: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 34px !important;
+        height: 34px !important;
+        color: transparent !important; /* Hide native ElementsKit 'X' text */
+        background: rgba(239, 68, 68, 0.15) !important; /* Premium glowing semi-transparent red-coral */
+        border: 1px solid #ef4444 !important; /* Premium red border */
+        border-radius: 50% !important;
+        font-size: 0 !important; /* Hide native ElementsKit 'X' text */
+        cursor: pointer !important;
+        transition: var(--transition-smooth) !important;
+        z-index: 1000000 !important;
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.3) !important; /* Glowing aura */
+    }
+
+    body .elementskit-menu-close::before,
+    .elementskit-menu-close::before,
+    body .elementskit-menu-close-btn::before,
+    .elementskit-menu-close-btn::before {
+        content: '✕' !important; /* Premium clean unicode close mark */
+        font-family: Arial, sans-serif !important;
+        font-size: 16px !important;
+        color: #ef4444 !important; /* High-contrast coral red close mark */
+        font-weight: bold !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: var(--transition-smooth) !important;
+    }
+
+    body .elementskit-menu-close:hover,
+    .elementskit-menu-close:hover,
+    body .elementskit-menu-close-btn:hover,
+    .elementskit-menu-close-btn:hover {
+        background: #ef4444 !important; /* Solid red background on hover */
+        border-color: #ef4444 !important;
+        box-shadow: 0 0 18px rgba(239, 68, 68, 0.6) !important; /* Hyper-glowing red */
+        transform: rotate(90deg) !important; /* Beautiful rotation */
+    }
+
+    body .elementskit-menu-close:hover::before,
+    .elementskit-menu-close:hover::before,
+    body .elementskit-menu-close-btn:hover::before,
+    .elementskit-menu-close-btn:hover::before {
+        color: #ffffff !important; /* Mark turns bright white on hover for premium feedback */
+    }
+
+    /* 4.1. Style Dropdown Caret Buttons (both Top-Level and Submenus like "Việc làm IT", "Lĩnh Vực Hot") to stand out from background */
+    body .elementor-157 .elementskit-menu-container .elementskit-submenu-panel-toggle,
+    body .elementskit-menu-container .elementskit-submenu-panel-toggle,
+    .elementskit-menu-container .elementskit-submenu-panel-toggle,
+    body .elementskit-menu-container .ekit-submenu-panel-toggle,
+    .elementskit-menu-container .ekit-submenu-panel-toggle,
+    body .elementskit-menu-container .ekit-menu-arrow,
+    .elementskit-menu-container .ekit-menu-arrow,
+    body .elementskit-menu-container .elementskit-submenu-indicator,
+    .elementskit-menu-container .elementskit-submenu-indicator {
+        background: rgba(20, 184, 166, 0.12) !important; /* Premium semi-transparent Neon Cyan */
+        border: 1px solid rgba(20, 184, 166, 0.5) !important; /* Glowing accent border */
+        color: var(--clr-accent) !important; /* High-contrast Neon Cyan icon color */
+        box-shadow: 0 0 10px rgba(20, 184, 166, 0.35) !important; /* Glowing aura */
+        opacity: 1 !important;
+        visibility: visible !important;
+        transition: var(--transition-smooth) !important;
+        margin-left: 10px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 28px !important;
+        width: 44px !important; /* Elegant pill shape width */
+        border-radius: 20px !important; /* Beautiful pill shape */
+    }
+
+    /* Force the inner icon caret arrow (SVG, font icon, border triangle, or pseudo-elements) to be glowing Neon Cyan */
+    body .elementskit-menu-container .elementskit-submenu-panel-toggle::before,
+    body .elementskit-menu-container .elementskit-submenu-panel-toggle::after,
+    body .elementskit-menu-container .elementskit-submenu-panel-toggle *,
+    .elementskit-menu-container .elementskit-submenu-panel-toggle *,
+    body .elementskit-menu-container .ekit-submenu-panel-toggle::before,
+    body .elementskit-menu-container .ekit-submenu-panel-toggle *,
+    body .elementskit-menu-container .ekit-menu-arrow::before,
+    body .elementskit-menu-container .ekit-menu-arrow *,
+    body .elementskit-menu-container .elementskit-submenu-panel-toggle svg,
+    body .elementskit-menu-container .elementskit-submenu-panel-toggle svg path,
+    body .elementskit-menu-container .ekit-submenu-panel-toggle svg,
+    body .elementskit-menu-container .ekit-submenu-panel-toggle svg path,
+    .elementskit-menu-container .elementskit-submenu-panel-toggle svg,
+    .elementskit-menu-container .elementskit-submenu-panel-toggle svg path,
+    body .elementskit-menu-container svg.elementskit-submenu-indicator,
+    body .elementskit-menu-container svg.elementskit-submenu-indicator path,
+    .elementskit-menu-container svg.elementskit-submenu-indicator,
+    .elementskit-menu-container svg.elementskit-submenu-indicator path {
+        color: var(--clr-accent) !important;
+        fill: var(--clr-accent) !important;
+        stroke: var(--clr-accent) !important;
+        border-color: var(--clr-accent) !important;
+        border-top-color: var(--clr-accent) !important;
+        opacity: 1 !important;
+    }
+
+    /* Style active/expanded state of dropdown caret buttons (Turn solid cyan, flip arrow to dark, and rotate) */
+    body .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-submenu-panel-toggle,
+    body .elementskit-menu-container li.elementskit-dropdown-open > .ekit-submenu-panel-toggle,
+    body .elementskit-menu-container li.active > .elementskit-submenu-panel-toggle,
+    body .elementskit-menu-container li.active > .ekit-submenu-panel-toggle,
+    body .elementskit-menu-container li.is-open > .elementskit-submenu-panel-toggle,
+    body .elementskit-menu-container li.is-open > .ekit-submenu-panel-toggle,
+    body .elementskit-menu-container li.elementskit-dropdown-open > a .ekit-menu-arrow,
+    body .elementskit-menu-container li.is-open > a .ekit-menu-arrow,
+    .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-submenu-panel-toggle,
+    .elementskit-menu-container li.is-open > .ekit-submenu-panel-toggle,
+    body .elementskit-menu-container li.elementskit-dropdown-open > a svg.elementskit-submenu-indicator,
+    body .elementskit-menu-container li.is-open > a svg.elementskit-submenu-indicator,
+    .elementskit-menu-container li.elementskit-dropdown-open > a svg.elementskit-submenu-indicator,
+    .elementskit-menu-container li.is-open > a svg.elementskit-submenu-indicator {
+        background: var(--clr-accent) !important; /* Solid cyan background when expanded */
+        border-color: var(--clr-accent) !important;
+        color: #0b0f19 !important;
+        box-shadow: 0 0 15px rgba(20, 184, 166, 0.6) !important;
+        transform: rotate(180deg) !important; /* Smoothly rotates 180deg */
+    }
+
+    body .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-submenu-panel-toggle::before,
+    body .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-submenu-panel-toggle *,
+    body .elementskit-menu-container li.active > .elementskit-submenu-panel-toggle *,
+    body .elementskit-menu-container li.is-open > .elementskit-submenu-panel-toggle *,
+    body .elementskit-menu-container li.elementskit-dropdown-open > a .ekit-menu-arrow::before,
+    body .elementskit-menu-container li.is-open > a .ekit-menu-arrow::before,
+    .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-submenu-panel-toggle *,
+    .elementskit-menu-container li.is-open > .ekit-submenu-panel-toggle *,
+    body .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-submenu-panel-toggle svg,
+    body .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-submenu-panel-toggle svg path,
+    body .elementskit-menu-container li.is-open > .ekit-submenu-panel-toggle svg,
+    body .elementskit-menu-container li.is-open > .ekit-submenu-panel-toggle svg path,
+    body .elementskit-menu-container li.elementskit-dropdown-open > a svg.elementskit-submenu-indicator path,
+    body .elementskit-menu-container li.is-open > a svg.elementskit-submenu-indicator path,
+    .elementskit-menu-container li.elementskit-dropdown-open > a svg.elementskit-submenu-indicator path,
+    .elementskit-menu-container li.is-open > a svg.elementskit-submenu-indicator path {
+        color: #0b0f19 !important; /* Icon turns dark midnight blue when expanded for premium feedback */
+        fill: #0b0f19 !important;
+        stroke: #0b0f19 !important;
+        border-color: #0b0f19 !important;
+        border-top-color: #0b0f19 !important;
+    }
+
+    /* Push the close button down on logged-in mobile views to clear the WordPress Admin Bar */
+    body.admin-bar .elementskit-menu-close,
+    body.admin-bar .elementskit-menu-close-btn {
+        top: 70px !important;
+    }
+
+    /* 5. Clean up Menu List and Force Vertical Alignment */
+    body .elementor-157 .elementskit-menu-container .elementskit-navbar-nav,
+    body .elementskit-menu-container.elementskit-navbar-nav-default .elementskit-navbar-nav,
+    body .elementskit-menu-container .elementskit-navbar-nav,
+    .elementskit-menu-container .elementskit-navbar-nav,
+    .elementskit-navbar-nav-default .elementskit-navbar-nav,
+    body .elementskit-menu-container ul#menu-primary-recruitment-menu,
+    body ul#menu-primary-recruitment-menu,
+    ul#menu-primary-recruitment-menu {
+        display: block !important; /* Force block layout to disable flex row from anywhere */
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        gap: 0 !important; /* Reset gap since they stack as blocks now */
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        float: none !important;
+        box-sizing: border-box !important;
+    }
+
+    body .elementor-157 .elementskit-menu-container .elementskit-navbar-nav > li,
+    body .elementskit-menu-container.elementskit-navbar-nav-default .elementskit-navbar-nav > li,
+    body .elementskit-menu-container .elementskit-navbar-nav > li,
+    .elementskit-menu-container .elementskit-navbar-nav > li,
+    .elementskit-navbar-nav-default .elementskit-navbar-nav > li,
+    body .elementskit-menu-container ul#menu-primary-recruitment-menu > li,
+    body ul#menu-primary-recruitment-menu > li,
+    ul#menu-primary-recruitment-menu > li,
+    body .elementskit-menu-container li.elementskit-mobile-builder-content,
+    body li.elementskit-mobile-builder-content,
+    li.elementskit-mobile-builder-content,
+    body .elementskit-menu-container .elementskit-navbar-nav li,
+    .elementskit-menu-container .elementskit-navbar-nav li {
+        display: block !important; /* Force block layout */
+        float: none !important;
+        clear: both !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        margin: 0 0 4px 0 !important; /* Elegant spacing between stacked items */
+        padding: 0 !important;
+        position: relative !important;
+        left: 0 !important;
+        right: auto !important;
+        text-align: left !important;
+        flex: none !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Hide desktop divider */
+    body .elementskit-navbar-nav::after,
+    .elementskit-navbar-nav::after {
+        display: none !important;
+    }
+
+    /* Style mobile menu links with superb contrast */
+    body .elementor-157 .elementskit-menu-container .elementskit-navbar-nav > li > a,
+    body .elementskit-menu-container.elementskit-navbar-nav-default .elementskit-navbar-nav > li > a,
+    body .elementskit-menu-container .elementskit-navbar-nav > li > a,
+    .elementskit-menu-container .elementskit-navbar-nav > li > a,
+    .elementskit-navbar-nav-default .elementskit-navbar-nav > li > a,
+    body .elementskit-menu-container ul#menu-primary-recruitment-menu > li > a,
+    body ul#menu-primary-recruitment-menu > li > a,
+    ul#menu-primary-recruitment-menu > li > a,
+    body .elementskit-menu-container li.elementskit-mobile-builder-content > a,
+    body li.elementskit-mobile-builder-content > a,
+    li.elementskit-mobile-builder-content > a,
+    body .elementskit-menu-container .elementskit-navbar-nav li > a,
+    .elementskit-menu-container .elementskit-navbar-nav li > a {
+        color: #ffffff !important;
+        font-family: var(--font-heading) !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        padding: 14px 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        text-align: left !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        height: auto !important;
+        line-height: normal !important;
+        background: transparent !important;
+        position: relative !important;
+        left: 0 !important;
+        right: auto !important;
+        margin: 0 !important;
+        white-space: normal !important; /* Force text to wrap if needed, overriding nowrap */
+        box-sizing: border-box !important;
+    }
+
+    body .elementskit-menu-container .elementskit-navbar-nav > li:hover > a,
+    .elementskit-menu-container .elementskit-navbar-nav > li:hover > a,
+    body ul#menu-primary-recruitment-menu > li:hover > a,
+    ul#menu-primary-recruitment-menu > li:hover > a,
+    body .elementskit-menu-container .elementskit-navbar-nav li:hover > a,
+    .elementskit-menu-container .elementskit-navbar-nav li:hover > a {
+        color: var(--clr-accent) !important;
+        border-bottom-color: var(--clr-accent) !important;
+    }
+
+    /* 6. Style active megamenu/submenu panels inside mobile drawer */
+    body .elementskit-menu-container .elementskit-megamenu-panel,
+    body .elementskit-menu-container .elementskit-submenu-panel,
+    .elementskit-menu-container .elementskit-megamenu-panel,
+    .elementskit-menu-container .elementskit-submenu-panel,
+    body .elementskit-menu-container .rec-megamenu-panel,
+    .elementskit-menu-container .rec-megamenu-panel {
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 8px !important;
+        padding: 16px !important;
+        margin-top: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        box-shadow: none !important;
+    }
+
+    /* Force mobile megamenu panel to display as vertical flex column stack when active */
+    body .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-megamenu-panel,
+    body .elementskit-menu-container li.ekit-dropdown-open > .elementskit-megamenu-panel,
+    body .elementskit-menu-container li.active > .elementskit-megamenu-panel,
+    body .elementskit-menu-container li.is-open > .elementskit-megamenu-panel,
+    .elementskit-menu-container li.elementskit-dropdown-open > .elementskit-megamenu-panel,
+    .elementskit-menu-container li.is-open > .elementskit-megamenu-panel,
+    body .elementskit-menu-container li.elementskit-dropdown-open > .rec-megamenu-panel,
+    body .elementskit-menu-container li.ekit-dropdown-open > .rec-megamenu-panel,
+    body .elementskit-menu-container li.active > .rec-megamenu-panel,
+    body .elementskit-menu-container li.is-open > .rec-megamenu-panel,
+    .elementskit-menu-container li.elementskit-dropdown-open > .rec-megamenu-panel,
+    .elementskit-menu-container li.is-open > .rec-megamenu-panel {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        height: auto !important;
+        overflow: visible !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* Override Desktop 3-Column Grid inside the mobile Megamenu Panel to Stack Vertically */
+    body .elementskit-menu-container .elementskit-megamenu-panel,
+    .elementskit-menu-container .elementskit-megamenu-panel,
+    body .elementskit-menu-container .rec-megamenu-panel,
+    .elementskit-menu-container .rec-megamenu-panel {
+        grid-template-columns: 1fr !important; /* Stack columns vertically */
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        position: relative !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        left: 0 !important;
+        right: auto !important;
+        transform: none !important;
+    }
+
+    body .elementskit-menu-container .rec-mm-col,
+    .elementskit-menu-container .rec-mm-col {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        align-self: flex-start !important;
+    }
+
+    /* Stack categories single column on mobile */
+    body .elementskit-menu-container .rec-mm-cat-grid,
+    .elementskit-menu-container .rec-mm-cat-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+        width: 100% !important;
+    }
+
+    /* Align featured job card properly on mobile */
+    body .elementskit-menu-container .rec-mm-feat-card,
+    .elementskit-menu-container .rec-mm-feat-card {
+        width: 100% !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    /* Ensure text inside expanded panels is silver-slate and readable */
+    body .elementskit-menu-container .elementskit-megamenu-panel *,
+    body .elementskit-menu-container .elementskit-submenu-panel *,
+    .elementskit-menu-container .elementskit-megamenu-panel *,
+    .elementskit-menu-container .elementskit-submenu-panel *,
+    body .elementskit-menu-container .rec-megamenu-panel *,
+    .elementskit-menu-container .rec-megamenu-panel * {
+        color: var(--clr-text-muted) !important;
+        font-size: 13px !important;
+    }
+
+    body .elementskit-menu-container .elementskit-megamenu-panel a,
+    body .elementskit-menu-container .elementskit-submenu-panel a,
+    .elementskit-menu-container .elementskit-megamenu-panel a,
+    .elementskit-menu-container .elementskit-submenu-panel a,
+    body .elementskit-menu-container .rec-megamenu-panel a,
+    .elementskit-menu-container .rec-megamenu-panel a {
+        padding: 8px 0 !important;
+        display: block !important;
+        color: var(--clr-text-muted) !important;
+        text-decoration: none !important;
+    }
+
+    body .elementskit-menu-container .elementskit-megamenu-panel a:hover,
+    body .elementskit-menu-container .elementskit-submenu-panel a:hover,
+    .elementskit-menu-container .elementskit-megamenu-panel a:hover,
+    .elementskit-menu-container .elementskit-submenu-panel a:hover,
+    body .elementskit-menu-container .rec-megamenu-panel a:hover,
+    .elementskit-menu-container .rec-megamenu-panel a:hover {
+        color: var(--clr-accent) !important;
+    }
+
+    /* Bulletproof Mobile Reset for all Elementor structural elements inside Megamenu panels to prevent horizontal stretching */
+    body .elementskit-menu-container .elementskit-megamenu-panel .elementor-section,
+    body .elementskit-menu-container .elementskit-megamenu-panel .elementor-container,
+    body .elementskit-menu-container .elementskit-megamenu-panel .elementor-column,
+    body .elementskit-menu-container .elementskit-megamenu-panel .elementor-widget-wrap,
+    body .elementskit-menu-container .elementskit-megamenu-panel .e-con,
+    body .elementskit-menu-container .elementskit-megamenu-panel .e-con-inner,
+    body .elementskit-menu-container .rec-megamenu-panel .elementor-section,
+    body .elementskit-menu-container .rec-megamenu-panel .elementor-container,
+    body .elementskit-menu-container .rec-megamenu-panel .elementor-column,
+    body .elementskit-menu-container .rec-megamenu-panel .elementor-widget-wrap,
+    body .elementskit-menu-container .rec-megamenu-panel .e-con,
+    body .elementskit-menu-container .rec-megamenu-panel .e-con-inner {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        float: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        box-sizing: border-box !important;
+        display: block !important; /* Stack vertically */
+    }
+
+    body .elementskit-menu-container .elementskit-megamenu-panel img,
+    body .elementskit-menu-container .rec-megamenu-panel img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+}
+
